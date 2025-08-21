@@ -25,7 +25,7 @@ const Header: React.FC = () => {
                 className="flex items-center space-x-2"
               >
                 <img 
-                  src="/IMAGE 2025-08-21 19:30:50.jpg" 
+                  src="/logo.jpg" 
                   alt="IshTopchi Logo" 
                   className="w-10 h-10 rounded-xl object-cover"
                 />

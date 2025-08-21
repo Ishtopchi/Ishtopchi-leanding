@@ -32,7 +32,7 @@ const HeroSection = () => {
               className="inline-flex items-center justify-center w-24 h-24 rounded-3xl mb-8 shadow-2xl overflow-hidden"
             >
               <img 
-                src="/IMAGE 2025-08-21 19:30:50.jpg" 
+                src="/logo.jpg" 
                 alt="IshTopchi Logo" 
                 className="w-full h-full object-cover"
                 aria-hidden="true" 
