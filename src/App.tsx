@@ -13,6 +13,9 @@ function App() {
       <LanguageProvider>
         <Router>
           <div className="min-h-screen bg-gradient-to-br from-slate-50 to-gray-100 dark:from-gray-900 dark:to-slate-800">
+            <a href="#main-content" className="skip-link">
+              Asosiy kontentga o'tish
+            </a>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/support" element={<SupportPage />} />

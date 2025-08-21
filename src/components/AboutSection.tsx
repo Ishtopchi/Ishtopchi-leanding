@@ -26,7 +26,7 @@ const AboutSection = () => {
   ];
 
   return (
-    <section ref={ref} className="py-20 bg-white dark:bg-gray-800">
+    <section ref={ref} className="py-20 bg-white dark:bg-gray-800" aria-label="Ilova haqida ma'lumot">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -34,7 +34,7 @@ const AboutSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6" id="about-title">
             {t('aboutTitle')}
           </h2>
           <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full" />
@@ -53,13 +53,14 @@ const AboutSection = () => {
                 transition: { duration: 0.3 }
               }}
               className="text-center"
+              role="article"
             >
               <motion.div 
                 whileHover={{ rotate: 360, scale: 1.1 }}
                 transition={{ duration: 0.6 }}
                 className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl mb-6"
               >
-                {feature.icon}
+                <span aria-hidden="true">{feature.icon}</span>
               </motion.div>
               <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                 {feature.text}

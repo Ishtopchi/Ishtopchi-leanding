@@ -22,10 +22,14 @@ const LanguageSelector = () => {
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm border border-white/20 dark:border-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-white/20 dark:hover:bg-gray-700/50 transition-all duration-300"
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        aria-label="Tilni tanlash"
+        title="Tilni tanlash"
       >
-        <Globe className="h-4 w-4" />
+        <Globe className="h-4 w-4" aria-hidden="true" />
         <span className="text-sm font-medium">{currentLanguage?.flag}</span>
-        <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
       </motion.button>
 
       <AnimatePresence>
@@ -36,6 +40,9 @@ const LanguageSelector = () => {
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
             className="absolute top-full mt-2 right-0 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden z-50 min-w-[140px]"
+            role="listbox"
+            aria-label="Tillar ro'yxati"
+            id="language-menu"
           >
             {languages.map((lang) => (
               <motion.button
@@ -45,6 +52,8 @@ const LanguageSelector = () => {
                   setLanguage(lang.code);
                   setIsOpen(false);
                 }}
+                role="option"
+                aria-selected={language === lang.code}
                 className={`w-full px-4 py-3 text-left flex items-center space-x-3 transition-colors ${
                   language === lang.code 
                     ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400' 
@@ -52,7 +61,7 @@ const LanguageSelector = () => {
                 }`}
               >
                 <span className="text-lg">{lang.flag}</span>
-                <span className="text-sm font-medium">{lang.name}</span>
+                <span className="text-sm font-medium" lang={lang.code}>{lang.name}</span>
               </motion.button>
             ))}
           </motion.div>

@@ -8,12 +8,12 @@ const Footer = () => {
   const { t } = useLanguage();
 
   return (
-    <footer className="bg-gray-900 text-white py-16">
+    <footer className="bg-gray-900 text-white py-16" role="contentinfo" aria-label="Sayt footer ma'lumotlari">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           <div className="md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <Smartphone className="h-8 w-8 text-blue-400" />
+              <Smartphone className="h-8 w-8 text-blue-400" aria-hidden="true" />
               <span className="text-2xl font-bold">{t('appName')}</span>
             </div>
             <p className="text-gray-400 mb-6 max-w-md leading-relaxed">
@@ -24,6 +24,8 @@ const Footer = () => {
                 href="https://t.me/ishtopchi"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Telegram kanalimizga obuna bo'ling"
+                title="Telegram"
                 whileHover={{ scale: 1.1, y: -2 }}
                 className="bg-gray-800 p-3 rounded-full hover:bg-gray-700 transition-colors"
               >
@@ -33,6 +35,8 @@ const Footer = () => {
                 href="https://www.instagram.com/ishtopchi/"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Instagram sahifamizni kuzatib boring"
+                title="Instagram"
                 whileHover={{ scale: 1.1, y: -2 }}
                 className="bg-gray-800 p-3 rounded-full hover:bg-gray-700 transition-colors"
               >
@@ -42,6 +46,8 @@ const Footer = () => {
                 href="https://www.linkedin.com/company/ishtopchi"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="LinkedIn sahifamizni kuzatib boring"
+                title="LinkedIn"
                 whileHover={{ scale: 1.1, y: -2 }}
                 className="bg-gray-800 p-3 rounded-full hover:bg-gray-700 transition-colors"
               >
@@ -51,7 +57,7 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">{t('pages')}</h3>
+            <h3 className="text-lg font-semibold mb-4" id="pages-heading">{t('pages')}</h3>
             <div className="space-y-2">
               <Link
                 to="/"
@@ -81,7 +87,7 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">{t('contact')}</h3>
+            <h3 className="text-lg font-semibold mb-4" id="contact-heading">{t('contact')}</h3>
             <div className="space-y-2 text-gray-400">
               <p>ishtopchi@gmail.com</p>
               <p>+998 77 055 01 25</p>

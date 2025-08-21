@@ -29,7 +29,7 @@ const HomePage = () => {
     }
   };
   return (
-    <div>
+    <div id="main-content">
       <SEOHead
         title={seoData[language].title}
         description={seoData[language].description}
