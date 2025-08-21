@@ -103,7 +103,46 @@ const Header = () => {
             >
               {t('partnership')}
             </Link>
-            <div className="flex items-center space-x-3 pt-4">
+            <div className="flex items-center justify-between pt-4">
+              <div className="flex items-center space-x-3">
+                <ThemeToggle />
+                <LanguageSelector />
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Desktop menu */}
+        <div className="hidden md:flex items-center space-x-8">
+          <motion.div whileHover={{ scale: 1.1, y: -2 }}>
+            <Link
+              to="/"
+              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300"
+            >
+              {t('home')}
+            </Link>
+          </motion.div>
+          <motion.div whileHover={{ scale: 1.1, y: -2 }}>
+            <Link
+              to="/support"
+              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300"
+            >
+              {t('support')}
+            </Link>
+          </motion.div>
+          <motion.div whileHover={{ scale: 1.1, y: -2 }}>
+            <Link
+              to="/marketing"
+              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300"
+            >
+              {t('partnership')}
+            </Link>
+          </motion.div>
+          <div className="flex items-center space-x-3">
+            <ThemeToggle />
+            <LanguageSelector />
+          </div>
+        </div>
               <ThemeToggle />
               <LanguageSelector />
             </div>
