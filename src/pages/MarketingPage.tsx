@@ -1,8 +1,10 @@
 import React from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { ArrowLeft, Users, TrendingUp, Target, Handshake } from 'lucide-react';
+import { ArrowLeft, Users, TrendingUp, Target, Handshake, Phone, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
 import Header from '../components/Header';
@@ -11,6 +13,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 
 const MarketingPage = () => {
   const { t, language } = useLanguage();
+  const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
@@ -153,7 +156,7 @@ const MarketingPage = () => {
               whileHover={{ scale: 1.08, y: -5, boxShadow: "0 20px 40px -12px rgba(0, 0, 0, 0.3)" }}
               whileTap={{ scale: 0.95 }}
               className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg transform-gpu"
-              onClick={() => window.open('mailto:ishtopchi@gmail.com', '_blank')}
+              onClick={() => setIsContactDialogOpen(true)}
             >
               {t('contactUs')}
             </motion.button>
@@ -217,10 +220,91 @@ const MarketingPage = () => {
             </motion.div>
           </div>
         </div>
+
+        {/* Contact Dialog */}
+        <AnimatePresence>
+          {isContactDialogOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              onClick={() => setIsContactDialogOpen(false)}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.8, y: 50 }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                className="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                    {t('contactUs')}
+                  </h3>
+                  <motion.button
+                    whileHover={{ scale: 1.1, rotate: 90 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => setIsContactDialogOpen(false)}
+                    className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    <X className="h-5 w-5 text-gray-500" />
+                  </motion.button>
+                </div>
+
+                <div className="text-center mb-8">
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: [0, -10, 10, -10, 0] }}
+                    transition={{ duration: 0.6 }}
+                    className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full mb-4"
+                  >
+                    <Phone className="h-8 w-8" />
+                  </motion.div>
+                  <p className="text-gray-600 dark:text-gray-300 mb-6">
+                    Bizning mutaxassislarimiz bilan bog'laning
+                  </p>
+                  
+                  <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-4 mb-6">
+                    <div className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                      +998 77 055 01 25
+                    </div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                      Ish kunlari: 9:00 - 18:00
+                    </div>
+                  </div>
+                </div>
       </div>
       <Footer />
     </div>
   );
 };
 
+                <div className="flex space-x-4">
+                  <motion.button
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      window.open('tel:+998770550125', '_self');
+                      setIsContactDialogOpen(false);
+                    }}
+                    className="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg flex items-center justify-center space-x-2"
+                  >
+                    <Phone className="h-5 w-5" />
+                    <span>Qo'ng'roq qilish</span>
+                  </motion.button>
+                  
+                  <motion.button
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setIsContactDialogOpen(false)}
+                    className="flex-1 bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-200 px-6 py-3 rounded-xl font-semibold hover:bg-gray-300 dark:hover:bg-gray-500 transition-all duration-300"
+                  >
+                    Bekor qilish
+                  </motion.button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 export default MarketingPage;
