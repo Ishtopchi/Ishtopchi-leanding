@@ -7,15 +7,15 @@ import ThemeToggle from './ThemeToggle';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { language, translations } = useLanguage();
+  const { t } = useLanguage();
   const { theme } = useTheme();
 
   const navigation = [
-    { name: translations.home, href: '#home' },
-    { name: translations.features, href: '#features' },
-    { name: translations.about, href: '#about' },
-    { name: translations.download, href: '#download' },
-    { name: translations.support, href: '#support' },
+    { name: t('home'), href: '#home' },
+    { name: t('featuresTitle'), href: '#features' },
+    { name: t('aboutTitle'), href: '#about' },
+    { name: t('downloadNow'), href: '#download' },
+    { name: t('support'), href: '#support' },
   ];
 
   return (
