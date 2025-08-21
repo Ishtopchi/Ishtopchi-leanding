@@ -127,10 +127,8 @@ const SupportPage = () => {
                     {faq.answer}
                   </p>
                 </motion.div>
+              ))}
             </div>
-          )
-          )
-          }
           </motion.div>
         </div>
       </div>
@@ -138,7 +136,3 @@ const SupportPage = () => {
     </div>
   );
 };
-
-export default SupportPage;
-  )
-}
