@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Menu, X, Globe, Sun, Moon, Briefcase } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
 import LanguageSelector from './LanguageSelector';
