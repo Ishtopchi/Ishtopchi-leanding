@@ -274,11 +274,6 @@ const MarketingPage = () => {
                     </div>
                   </div>
                 </div>
-      </div>
-      <Footer />
-    </div>
-  );
-};
 
                 <div className="flex space-x-4">
                   <motion.button
@@ -307,4 +302,10 @@ const MarketingPage = () => {
             </motion.div>
           )}
         </AnimatePresence>
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
 export default MarketingPage;
