@@ -29,9 +29,14 @@ const HeroSection = () => {
                 rotate: [0, -10, 10, -10, 0],
                 transition: { duration: 0.6 }
               }}
-              className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl mb-8 shadow-2xl"
+              className="inline-flex items-center justify-center w-24 h-24 rounded-3xl mb-8 shadow-2xl overflow-hidden"
             >
-              <Smartphone className="h-12 w-12 text-white" aria-hidden="true" />
+              <img 
+                src="/IMAGE 2025-08-21 19:30:50.jpg" 
+                alt="IshTopchi Logo" 
+                className="w-full h-full object-cover"
+                aria-hidden="true" 
+              />
             </motion.div>
             
             <motion.h1 
