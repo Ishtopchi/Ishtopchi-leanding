@@ -127,7 +127,6 @@ const SupportPage = () => {
                     {faq.answer}
                   </p>
                 </motion.div>
-              <p>+998 77 055 01 25</p>
             </div>
           )
           )
