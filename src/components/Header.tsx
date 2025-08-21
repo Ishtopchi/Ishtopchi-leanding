@@ -54,7 +54,6 @@ const Header: React.FC = () => {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
-            <ThemeToggle />
             <LanguageSelector />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -74,6 +73,14 @@ const Header: React.FC = () => {
       {isMenuOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+            {/* Theme toggle in mobile menu */}
+            <div className="px-3 py-2 flex items-center justify-between">
+              <span className="text-gray-700 dark:text-gray-300 text-base font-medium">
+                {t('theme') || 'Theme'}
+              </span>
+              <ThemeToggle />
+            </div>
+            <div className="border-t border-gray-200 dark:border-gray-700 my-2"></div>
             {navigation.map((item) => (
               <a
                 key={item.name}
