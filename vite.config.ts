@@ -14,13 +14,8 @@ export default defineConfig({
         }
       }
     },
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true
-      }
-    }
+    minify: 'esbuild',
+    target: 'es2015'
   },
   optimizeDeps: {
     exclude: ['lucide-react'],
