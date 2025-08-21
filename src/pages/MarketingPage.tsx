@@ -4,23 +4,26 @@ import { ArrowLeft, Users, TrendingUp, Target, Handshake } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const MarketingPage = () => {
+  const { t } = useLanguage();
+
   const benefits = [
     {
       icon: <Users className="h-8 w-8" />,
-      title: "Keng auditoriya",
-      description: "Minglab faol foydalanuvchilar orasida o'z kompaniyangizni targ'ib qiling"
+      title: t('wideAudience'),
+      description: t('wideAudienceDesc')
     },
     {
       icon: <TrendingUp className="h-8 w-8" />,
-      title: "Yuqori konversiya",
-      description: "Maqsadli auditoriya va yuqori sifatli kandidatlar"
+      title: t('highConversion'),
+      description: t('highConversionDesc')
     },
     {
       icon: <Target className="h-8 w-8" />,
-      title: "Aniq maqsadlash",
-      description: "Kerakli malaka va tajribaga ega mutaxassislarni toping"
+      title: t('preciseTargeting'),
+      description: t('preciseTargetingDesc')
     }
   ];
 
@@ -40,15 +43,14 @@ const MarketingPage = () => {
               className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-6"
             >
               <ArrowLeft className="h-5 w-5 mr-2" />
-              Bosh sahifaga qaytish
+              {t('backToHome')}
             </Link>
             <div className="text-center">
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-                Biznes hamkorligi
+                {t('marketingTitle')}
               </h1>
               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                IshTopchi bilan hamkorlik qiling va o'z kompaniyangiz uchun 
-                eng yaxshi mutaxassislarni toping
+                {t('marketingDescription')}
               </p>
             </div>
           </motion.div>
@@ -83,11 +85,10 @@ const MarketingPage = () => {
           >
             <Handshake className="h-16 w-16 mx-auto mb-6" />
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Hamkorlik boshlaylik!
+              {t('startPartnership')}
             </h2>
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              O'z kompaniyangiz uchun eng yaxshi talantlarni topishga tayyor misiz?
-              Biz bilan bog'laning va hamkorlikni boshlaylik.
+              {t('partnershipDesc')}
             </p>
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
@@ -95,7 +96,7 @@ const MarketingPage = () => {
               className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-colors shadow-lg"
               onClick={() => window.open('mailto:ishtopchi@gmail.com', '_blank')}
             >
-              Aloqa qurish
+              {t('contactUs')}
             </motion.button>
           </motion.div>
 
@@ -106,24 +107,24 @@ const MarketingPage = () => {
               transition={{ duration: 0.6, delay: 0.5 }}
             >
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                Ish beruvchilar uchun
+                {t('forEmployers')}
               </h3>
               <ul className="space-y-4 text-gray-600 dark:text-gray-300">
                 <li className="flex items-start">
                   <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                  <span>Bepul vakansiya e'lon qilish imkoniyati</span>
+                  <span>{t('freeJobPosting')}</span>
                 </li>
                 <li className="flex items-start">
                   <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                  <span>Kandidatlar bilan to'g'ridan-to'g'ri chat</span>
+                  <span>{t('directChatWithCandidates')}</span>
                 </li>
                 <li className="flex items-start">
                   <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                  <span>Moslashuvchan filtrlar va qidiruv</span>
+                  <span>{t('flexibleFilters')}</span>
                 </li>
                 <li className="flex items-start">
                   <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                  <span>Analitika va hisobotlar</span>
+                  <span>{t('analyticsReports')}</span>
                 </li>
               </ul>
             </motion.div>
@@ -134,24 +135,24 @@ const MarketingPage = () => {
               transition={{ duration: 0.6, delay: 0.6 }}
             >
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                Premium xizmatlar
+                {t('premiumServices')}
               </h3>
               <ul className="space-y-4 text-gray-600 dark:text-gray-300">
                 <li className="flex items-start">
                   <div className="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                  <span>E'lonlarni yuqoriga chiqarish</span>
+                  <span>{t('promoteListings')}</span>
                 </li>
                 <li className="flex items-start">
                   <div className="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                  <span>Maxsus dizayn va brendlash</span>
+                  <span>{t('customDesign')}</span>
                 </li>
                 <li className="flex items-start">
                   <div className="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                  <span>Kengaytirilgan analitika</span>
+                  <span>{t('extendedAnalytics')}</span>
                 </li>
                 <li className="flex items-start">
                   <div className="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                  <span>24/7 shaxsiy yordam</span>
+                  <span>{t('personalSupport')}</span>
                 </li>
               </ul>
             </motion.div>

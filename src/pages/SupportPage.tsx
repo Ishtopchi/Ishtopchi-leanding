@@ -4,24 +4,27 @@ import { ArrowLeft, HelpCircle, MessageCircle, Mail, Phone } from 'lucide-react'
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const SupportPage = () => {
+  const { t } = useLanguage();
+
   const faqs = [
     {
-      question: "IshTopchi ilovasini qanday ishlataman?",
-      answer: "Ilovani yuklab oling, ro'yxatdan o'ting va kerakli ishni qidiring. Filtrlar yordamida qidiruvni aniqlashtiring."
+      question: t('faq1Q'),
+      answer: t('faq1A')
     },
     {
-      question: "Ishga murojaat qilish bepulmi?",
-      answer: "Ha, IshTopchi ilovasida ishga murojaat qilish mutlaqo bepul."
+      question: t('faq2Q'),
+      answer: t('faq2A')
     },
     {
-      question: "Ish beruvchilar bilan qanday bog'lanaman?",
-      answer: "Ilova ichidagi chat funksiyasi orqali ish beruvchilar bilan to'g'ridan-to'g'ri muloqot qilishingiz mumkin."
+      question: t('faq3Q'),
+      answer: t('faq3A')
     },
     {
-      question: "Parolimni unutdim, nima qilishim kerak?",
-      answer: "Kirish sahifasida 'Parolni unutdingizmi?' tugmasini bosing va ko'rsatmalarga amal qiling."
+      question: t('faq4Q'),
+      answer: t('faq4A')
     }
   ];
 
@@ -41,13 +44,13 @@ const SupportPage = () => {
               className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-4"
             >
               <ArrowLeft className="h-5 w-5 mr-2" />
-              Bosh sahifaga qaytish
+              {t('backToHome')}
             </Link>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Yordam markazi
+              {t('supportTitle')}
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300">
-              IshTopchi ilova haqida savollaringiz bormi? Biz yordam beramiz!
+              {t('supportDescription')}
             </p>
           </motion.div>
 
@@ -60,10 +63,10 @@ const SupportPage = () => {
             >
               <MessageCircle className="h-8 w-8 text-blue-600 mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                Onlayn chat
+                {t('onlineChat')}
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
-                24/7 onlayn yordam xizmati
+                {t('onlineChatDesc')}
               </p>
             </motion.div>
 
@@ -75,7 +78,7 @@ const SupportPage = () => {
             >
               <Mail className="h-8 w-8 text-green-600 mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                Elektron pochta
+                {t('email')}
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
                 ishtopchi@gmail.com
@@ -90,7 +93,7 @@ const SupportPage = () => {
             >
               <Phone className="h-8 w-8 text-purple-600 mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                Telefon orqali yordam
+                {t('phoneSupport')}
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
                 +998 77 055 01 25
@@ -107,7 +110,7 @@ const SupportPage = () => {
             <div className="flex items-center mb-6">
               <HelpCircle className="h-8 w-8 text-blue-600 mr-3" />
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                Ko'p beriladigan savollar
+                {t('faqTitle')}
               </h2>
             </div>
 

@@ -14,6 +14,7 @@ const translations = {
     home: "Bosh sahifa",
     support: "Yordam",
     partnership: "Hamkorlik",
+    privacy: "Maxfiylik siyosati",
     
     // Hero Section
     appName: "IshTopchi",
@@ -116,6 +117,7 @@ const translations = {
     home: "Home",
     support: "Support",
     partnership: "Partnership",
+    privacy: "Privacy Policy",
     
     // Hero Section
     appName: "IshTopchi",
@@ -218,6 +220,7 @@ const translations = {
     home: "Главная",
     support: "Поддержка",
     partnership: "Партнерство",
+    privacy: "Политика конфиденциальности",
     
     // Hero Section
     appName: "IshTopchi",
