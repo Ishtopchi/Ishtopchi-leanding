@@ -93,7 +93,7 @@ const SupportPage = () => {
                 Telefon orqali yordam
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
-                +998 99 534 03 13
+                +998 77 055 01 25
               </p>
             </motion.div>
           </div>
@@ -140,5 +140,3 @@ const SupportPage = () => {
 };
 
 export default SupportPage;
-  )
-}
