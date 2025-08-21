@@ -49,9 +49,14 @@ const FeaturesSection = () => {
               key={index}
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              whileHover={{ y: -10, scale: 1.05 }}
-              className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+              transition={{ duration: 0.8, delay: index * 0.2, type: "spring", stiffness: 100 }}
+              whileHover={{ 
+                y: -15, 
+                scale: 1.08, 
+                rotateY: 5,
+                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+              }}
+              className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform-gpu"
             >
               <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl mb-6">
                 {feature.icon}

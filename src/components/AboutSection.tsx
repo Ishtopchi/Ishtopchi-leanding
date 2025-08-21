@@ -46,12 +46,21 @@ const AboutSection = () => {
               key={index}
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
+              transition={{ duration: 0.8, delay: index * 0.2, type: "spring", stiffness: 80 }}
+              whileHover={{ 
+                scale: 1.05, 
+                y: -10,
+                transition: { duration: 0.3 }
+              }}
               className="text-center"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl mb-6">
+              <motion.div 
+                whileHover={{ rotate: 360, scale: 1.1 }}
+                transition={{ duration: 0.6 }}
+                className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl mb-6"
+              >
                 {feature.icon}
-              </div>
+              </motion.div>
               <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                 {feature.text}
               </p>

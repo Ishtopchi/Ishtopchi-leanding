@@ -1,79 +1,143 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Apple, Play } from 'lucide-react';
-import AnimatedBackground from './AnimatedBackground';
+import { ArrowLeft, HelpCircle, MessageCircle, Mail, Phone } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import { useLanguage } from '../contexts/LanguageContext';
 
-const HeroSection = () => {
+const SupportPage = () => {
   const { t } = useLanguage();
 
+  const faqs = [
+    {
+      question: t('faq1Q'),
+      answer: t('faq1A')
+    },
+    {
+      question: t('faq2Q'),
+      answer: t('faq2A')
+    },
+    {
+      question: t('faq3Q'),
+      answer: t('faq3A')
+    },
+    {
+      question: t('faq4Q'),
+      answer: t('faq4A')
+    }
+  ];
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      <AnimatedBackground />
-      
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-4"
-        >
-          {t('appName')}
-        </motion.h1>
-        
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4 }}
-          className="text-xl md:text-2xl text-blue-600 dark:text-blue-400 font-medium mb-6"
-        >
-          {t('heroSubtitle')}
-        </motion.p>
-        
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed"
-        >
-          {t('heroDescription')}
-        </motion.p>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-        >
-          <motion.button
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => window.open('https://play.google.com/store/apps/details?id=torex.top.ishtopchi', '_blank')}
-            className="flex items-center space-x-3 bg-black text-white px-6 py-3 rounded-xl font-medium hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-2xl"
+    <div>
+      <Header />
+      <div className="pt-16 min-h-screen bg-gradient-to-br from-slate-50 to-gray-100 dark:from-gray-900 dark:to-slate-800">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-8"
           >
-            <Apple className="h-5 w-5" />
-            <div className="text-left">
-              <div className="text-xs">{t('downloadFrom')}</div>
-              <div className="text-sm font-semibold">{t('appStore')}</div>
-            </div>
-          </motion.button>
-          
-          <motion.button
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => window.open('https://play.google.com/store/apps/details?id=torex.top.ishtopchi', '_blank')}
-            className="flex items-center space-x-3 bg-green-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-2xl"
+            <Link
+              to="/"
+              className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-4"
+            >
+              <ArrowLeft className="h-5 w-5 mr-2" />
+              {t('backToHome')}
+            </Link>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+              {t('supportTitle')}
+            </h1>
+            <p className="text-xl text-gray-600 dark:text-gray-300">
+              {t('supportDescription')}
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg"
+            >
+              <MessageCircle className="h-8 w-8 text-blue-600 mb-4" />
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                {t('onlineChat')}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                {t('onlineChatDesc')}
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg"
+            >
+              <Mail className="h-8 w-8 text-green-600 mb-4" />
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                {t('email')}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                ishtopchi@gmail.com
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg"
+            >
+              <Phone className="h-8 w-8 text-purple-600 mb-4" />
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                {t('phoneSupport')}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                +998 77 055 01 25
+              </p>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8"
           >
-            <Play className="h-5 w-5" />
-            <div className="text-left">
-              <div className="text-xs">{t('downloadFrom')}</div>
-              <div className="text-sm font-semibold">{t('googlePlay')}</div>
+            <div className="flex items-center mb-6">
+              <HelpCircle className="h-8 w-8 text-blue-600 mr-3" />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                Ko'p beriladigan savollar
+              </h2>
             </div>
-          </motion.button>
-        </motion.div>
+
+            <div className="space-y-6">
+              {faqs.map((faq, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 * index }}
+                  className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-b-0 last:pb-0"
+                >
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                    {faq.question}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
       </div>
-    </section>
+      <Footer />
+    </div>
   );
 };
 
-export default HeroSection;
+export default SupportPage;
