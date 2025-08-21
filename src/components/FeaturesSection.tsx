@@ -3,26 +3,28 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Briefcase, MessageSquare, Zap } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const FeaturesSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
 
   const features = [
     {
       icon: <Briefcase className="h-8 w-8" />,
-      title: "Ish topish",
-      description: "Minglab vakansiyalar orasidan sizga mos ishni toping"
+      title: t('findJob'),
+      description: t('findJobDesc')
     },
     {
       icon: <MessageSquare className="h-8 w-8" />,
-      title: "To'g'ridan-to'g'ri chat",
-      description: "Ish beruvchilar bilan bevosita muloqot qiling"
+      title: t('directChatTitle'),
+      description: t('directChatDesc')
     },
     {
       icon: <Zap className="h-8 w-8" />,
-      title: "Oson murojaat",
-      description: "Bir tugma bosish bilan ishga murojaat qiling"
+      title: t('easyApply'),
+      description: t('easyApplyDesc')
     }
   ];
 
@@ -36,7 +38,7 @@ const FeaturesSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-            Asosiy xususiyatlar
+            {t('featuresTitle')}
           </h2>
           <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full" />
         </motion.div>

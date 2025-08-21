@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X, Smartphone } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
+import LanguageSelector from './LanguageSelector';
+import ThemeToggle from './ThemeToggle';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <motion.header
@@ -18,7 +22,7 @@ const Header = () => {
           <Link to="/" className="flex items-center space-x-2">
             <Smartphone className="h-8 w-8 text-blue-600" />
             <span className="text-2xl font-bold text-gray-900 dark:text-white">
-              IshTopchi
+              {t('appName')}
             </span>
           </Link>
 
@@ -27,20 +31,24 @@ const Header = () => {
               to="/"
               className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
-              Bosh sahifa
+              {t('home')}
             </Link>
             <Link
               to="/support"
               className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
-              Yordam
+              {t('support')}
             </Link>
             <Link
               to="/marketing"
               className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
-              Hamkorlik
+              {t('partnership')}
             </Link>
+            <div className="flex items-center space-x-3">
+              <ThemeToggle />
+              <LanguageSelector />
+            </div>
           </div>
 
           <button
@@ -63,22 +71,26 @@ const Header = () => {
               className="block text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               onClick={() => setIsOpen(false)}
             >
-              Bosh sahifa
+              {t('home')}
             </Link>
             <Link
               to="/support"
               className="block text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               onClick={() => setIsOpen(false)}
             >
-              Yordam
+              {t('support')}
             </Link>
             <Link
               to="/marketing"
               className="block text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               onClick={() => setIsOpen(false)}
             >
-              Hamkorlik
+              {t('partnership')}
             </Link>
+            <div className="flex items-center space-x-3 pt-4">
+              <ThemeToggle />
+              <LanguageSelector />
+            </div>
           </motion.div>
         )}
       </nav>

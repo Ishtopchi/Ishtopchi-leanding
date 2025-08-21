@@ -3,23 +3,25 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Eye, Filter, MessageCircle } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const AboutSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
 
   const features = [
     {
       icon: <Eye className="h-6 w-6" />,
-      text: "Ishlarni hisob ochmasdan ko'rish"
+      text: t('viewJobsWithoutAccount')
     },
     {
       icon: <Filter className="h-6 w-6" />,
-      text: "Vakansiyalarni filtr bilan qidirish (maosh, joylashuv, ish turi)"
+      text: t('filterJobs')
     },
     {
       icon: <MessageCircle className="h-6 w-6" />,
-      text: "Ish beruvchilar bilan chat orqali bevosita bog'lanish"
+      text: t('directChat')
     }
   ];
 
@@ -33,7 +35,7 @@ const AboutSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-            Ilova haqida
+            {t('aboutTitle')}
           </h2>
           <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full" />
         </motion.div>

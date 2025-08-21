@@ -2,8 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Smartphone, Send, Instagram, Linkedin } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Footer = () => {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-gray-900 text-white py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -11,15 +14,14 @@ const Footer = () => {
           <div className="md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <Smartphone className="h-8 w-8 text-blue-400" />
-              <span className="text-2xl font-bold">IshTopchi</span>
+              <span className="text-2xl font-bold">{t('appName')}</span>
             </div>
             <p className="text-gray-400 mb-6 max-w-md leading-relaxed">
-              Ish topishning eng oson yo'li. Sizga mos ishni toping va 
-              ish beruvchilar bilan to'g'ridan-to'g'ri bog'laning.
+              {t('footerDescription')}
             </p>
             <div className="flex space-x-4">
               <motion.a
-                href="https://t.me/torex_dev"
+                href="https://t.me/ishtopchi"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -2 }}
@@ -28,7 +30,7 @@ const Footer = () => {
                 <Send className="h-5 w-5 text-blue-400" />
               </motion.a>
               <motion.a
-                href="https://www.instagram.com/torex.dev"
+                href="https://www.instagram.com/ishtopchi/"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -2 }}
@@ -37,7 +39,7 @@ const Footer = () => {
                 <Instagram className="h-5 w-5 text-pink-400" />
               </motion.a>
               <motion.a
-                href="https://www.linkedin.com/in/dilshodjon-haydarov-6715a6246/"
+                href="https://www.linkedin.com/company/ishtopchi"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -2 }}
@@ -49,40 +51,40 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Sahifalar</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('pages')}</h3>
             <div className="space-y-2">
               <Link
                 to="/"
                 className="block text-gray-400 hover:text-white transition-colors"
               >
-                Bosh sahifa
+                {t('home')}
               </Link>
               <Link
                 to="/support"
                 className="block text-gray-400 hover:text-white transition-colors"
               >
-                Yordam
+                {t('support')}
               </Link>
               <Link
                 to="/marketing"
                 className="block text-gray-400 hover:text-white transition-colors"
               >
-                Hamkorlik
+                {t('partnership')}
               </Link>
               <Link
                 to="/privacy"
                 className="block text-gray-400 hover:text-white transition-colors"
               >
-                Maxfiylik siyosati
+                {t('privacyTitle')}
               </Link>
             </div>
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Aloqa</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('contact')}</h3>
             <div className="space-y-2 text-gray-400">
               <p>ishtopchi@gmail.com</p>
-              <p>+998 99 534 03 13</p>
+              <p>+998 77 055 01 25</p>
               <p>Toshkent, O'zbekiston</p>
             </div>
           </div>
@@ -90,7 +92,7 @@ const Footer = () => {
         
         <div className="pt-8 border-t border-gray-800 text-center">
           <p className="text-gray-400">
-            © 2025 IshTopchi. All rights reserved.
+            © 2025 {t('appName')}. {t('allRightsReserved')}
           </p>
         </div>
       </div>
