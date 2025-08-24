@@ -18,19 +18,68 @@ const SupportPage = () => {
 
   const seoData = {
     uz: {
-      title: "Yordam markazi - IshTopchi | 24/7 qo'llab-quvvatlash xizmati",
-      description: "IshTopchi yordam markazi. 24/7 onlayn chat, elektron pochta va telefon orqali yordam. Ko'p beriladigan savollar va javoblar.",
-      keywords: "yordam, qo'llab-quvvatlash, FAQ, chat, email, telefon, ishtopchi yordam"
+      title: "Yordam markazi - IshTopchi | 24/7 qo'llab-quvvatlash xizmati | FAQ va onlayn chat",
+      description: "🆘 IshTopchi yordam markazi - 24/7 qo'llab-quvvatlash! Onlayn chat, elektron pochta va telefon orqali yordam. Ko'p beriladigan savollar va javoblar. Tezkor yordam olish uchun bizga murojaat qiling!",
+      keywords: "yordam, qo'llab-quvvatlash, FAQ, chat, email, telefon, ishtopchi yordam, onlayn yordam, texnik yordam, foydalanuvchi qo'llanmasi, maslahat, muammo yechish, savol javob, 24/7 yordam, tezkor yordam, mijozlar xizmati, qo'ng'iroq markazi, elektron pochta yordam, chat yordam, yordam markazi, qo'llab-quvvatlash xizmati"
     },
     en: {
-      title: "Help Center - IshTopchi | 24/7 support service",
-      description: "IshTopchi help center. 24/7 online chat, email and phone support. Frequently asked questions and answers.",
-      keywords: "help, support, FAQ, chat, email, phone, ishtopchi support"
+      title: "Help Center - IshTopchi | 24/7 support service | FAQ and online chat",
+      description: "🆘 IshTopchi help center - 24/7 support! Online chat, email and phone support. Frequently asked questions and answers. Contact us for quick help!",
+      keywords: "help, support, FAQ, chat, email, phone, ishtopchi support, online help, technical support, user guide, advice, problem solving, question answer, 24/7 help, quick help, customer service, call center, email support, chat support, help center, support service"
     },
     ru: {
-      title: "Центр поддержки - IshTopchi | Служба поддержки 24/7",
-      description: "Центр поддержки IshTopchi. Онлайн чат 24/7, поддержка по электронной почте и телефону. Часто задаваемые вопросы и ответы.",
-      keywords: "помощь, поддержка, FAQ, чат, email, телефон, поддержка ishtopchi"
+      title: "Центр поддержки - IshTopchi | Служба поддержки 24/7 | FAQ и онлайн чат",
+      description: "🆘 Центр поддержки IshTopchi - поддержка 24/7! Онлайн чат, поддержка по электронной почте и телефону. Часто задаваемые вопросы и ответы. Обращайтесь к нам за быстрой помощью!",
+      keywords: "помощь, поддержка, FAQ, чат, email, телефон, поддержка ishtopchi, онлайн помощь, техническая поддержка, руководство пользователя, совет, решение проблем, вопрос ответ, помощь 24/7, быстрая помощь, служба клиентов, колл-центр, поддержка по email, поддержка в чате, центр помощи, служба поддержки"
+    }
+  };
+
+  const alternateLanguages = {
+    'uz': `https://ishtopchi.uz/uz/support`,
+    'en': `https://ishtopchi.uz/en/support`,
+    'ru': `https://ishtopchi.uz/ru/support`,
+    'x-default': `https://ishtopchi.uz/uz/support`
+  };
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": seoData[language].title,
+    "description": seoData[language].description,
+    "url": `https://ishtopchi.uz/${currentLang}/support`,
+    "inLanguage": language,
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "IshTopchi",
+      "url": "https://ishtopchi.uz"
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Bosh sahifa",
+          "item": `https://ishtopchi.uz/${currentLang}`
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Yordam",
+          "item": `https://ishtopchi.uz/${currentLang}/support`
+        }
+      ]
+    },
+    "mainEntity": {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((faq, index) => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
     }
   };
 
@@ -60,6 +109,8 @@ const SupportPage = () => {
         description={seoData[language].description}
         keywords={seoData[language].keywords}
         canonical={`https://ishtopchi.uz/${currentLang}/support`}
+        structuredData={structuredData}
+        alternateLanguages={alternateLanguages}
       />
       <Header />
       <div ref={ref} className="pt-16 min-h-screen bg-gradient-to-br from-slate-50 to-gray-100 dark:from-gray-900 dark:to-slate-800">
