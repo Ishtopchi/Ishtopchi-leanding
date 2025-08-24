@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, ChevronDown } from 'lucide-react';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useLanguage, Language } from '../contexts/LanguageContext';
 
 const LanguageSelector = () => {
   const { language, setLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { lang } = useParams<{ lang: string }>();
 
   const languages = [
     { code: 'uz' as Language, name: 'O\'zbek', flag: '🇺🇿' },
@@ -15,6 +19,16 @@ const LanguageSelector = () => {
 
   const currentLanguage = languages.find(lang => lang.code === language);
 
+  const handleLanguageChange = (newLang: Language) => {
+    setLanguage(newLang);
+    setIsOpen(false);
+    
+    // Get current path without language prefix
+    const pathWithoutLang = location.pathname.replace(/^\/[a-z]{2}/, '') || '';
+    
+    // Navigate to new language path
+    navigate(`/${newLang}${pathWithoutLang}`);
+  };
   return (
     <div className="relative">
       <motion.button
@@ -49,8 +63,7 @@ const LanguageSelector = () => {
                 key={lang.code}
                 whileHover={{ backgroundColor: 'rgba(59, 130, 246, 0.1)' }}
                 onClick={() => {
-                  setLanguage(lang.code);
-                  setIsOpen(false);
+                  handleLanguageChange(lang.code);
                 }}
                 role="option"
                 aria-selected={language === lang.code}

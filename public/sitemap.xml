@@ -4,46 +4,126 @@
   
   <!-- Homepage -->
   <url>
-    <loc>https://ishtopchi.uz/</loc>
+    <loc>https://ishtopchi.uz/uz</loc>
     <lastmod>2025-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ishtopchi.uz/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ishtopchi.uz/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ishtopchi.uz/uz" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ishtopchi.uz/en" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/ru" />
+  </url>
+  
+  <url>
+    <loc>https://ishtopchi.uz/en</loc>
+    <lastmod>2025-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ishtopchi.uz/uz" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ishtopchi.uz/en" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/ru" />
+  </url>
+  
+  <url>
+    <loc>https://ishtopchi.uz/ru</loc>
+    <lastmod>2025-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ishtopchi.uz/uz" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ishtopchi.uz/en" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/ru" />
   </url>
   
   <!-- Support Page -->
   <url>
-    <loc>https://ishtopchi.uz/support</loc>
+    <loc>https://ishtopchi.uz/uz/support</loc>
     <lastmod>2025-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ishtopchi.uz/support" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ishtopchi.uz/support" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/support" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ishtopchi.uz/uz/support" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ishtopchi.uz/en/support" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/ru/support" />
+  </url>
+  
+  <url>
+    <loc>https://ishtopchi.uz/en/support</loc>
+    <lastmod>2025-01-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ishtopchi.uz/uz/support" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ishtopchi.uz/en/support" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/ru/support" />
+  </url>
+  
+  <url>
+    <loc>https://ishtopchi.uz/ru/support</loc>
+    <lastmod>2025-01-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ishtopchi.uz/uz/support" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ishtopchi.uz/en/support" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/ru/support" />
   </url>
   
   <!-- Marketing Page -->
   <url>
-    <loc>https://ishtopchi.uz/marketing</loc>
+    <loc>https://ishtopchi.uz/uz/marketing</loc>
     <lastmod>2025-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ishtopchi.uz/marketing" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ishtopchi.uz/marketing" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/marketing" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ishtopchi.uz/uz/marketing" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ishtopchi.uz/en/marketing" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/ru/marketing" />
+  </url>
+  
+  <url>
+    <loc>https://ishtopchi.uz/en/marketing</loc>
+    <lastmod>2025-01-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ishtopchi.uz/uz/marketing" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ishtopchi.uz/en/marketing" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/ru/marketing" />
+  </url>
+  
+  <url>
+    <loc>https://ishtopchi.uz/ru/marketing</loc>
+    <lastmod>2025-01-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ishtopchi.uz/uz/marketing" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ishtopchi.uz/en/marketing" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/ru/marketing" />
   </url>
   
   <!-- Privacy Page -->
   <url>
-    <loc>https://ishtopchi.uz/privacy</loc>
+    <loc>https://ishtopchi.uz/uz/privacy</loc>
     <lastmod>2025-01-21</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ishtopchi.uz/privacy" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ishtopchi.uz/privacy" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/privacy" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ishtopchi.uz/uz/privacy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ishtopchi.uz/en/privacy" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/ru/privacy" />
+  </url>
+  
+  <url>
+    <loc>https://ishtopchi.uz/en/privacy</loc>
+    <lastmod>2025-01-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ishtopchi.uz/uz/privacy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ishtopchi.uz/en/privacy" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/ru/privacy" />
+  </url>
+  
+  <url>
+    <loc>https://ishtopchi.uz/ru/privacy</loc>
+    <lastmod>2025-01-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ishtopchi.uz/uz/privacy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ishtopchi.uz/en/privacy" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/ru/privacy" />
   </url>
   
 </urlset>

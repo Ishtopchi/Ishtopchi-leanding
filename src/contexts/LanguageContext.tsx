@@ -321,11 +321,24 @@ const translations = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const LanguageProvider: React.FC<{ 
+  children: React.ReactNode;
+  initialLanguage?: Language;
+}> = ({ children, initialLanguage }) => {
   const [language, setLanguage] = useState<Language>(() => {
+    if (initialLanguage) {
+      return initialLanguage;
+    }
     const saved = localStorage.getItem('language');
     return (saved as Language) || 'uz';
   });
+
+  // Update language when initialLanguage changes
+  React.useEffect(() => {
+    if (initialLanguage && initialLanguage !== language) {
+      setLanguage(initialLanguage);
+    }
+  }, [initialLanguage, language]);
 
   useEffect(() => {
     localStorage.setItem('language', language);

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
 import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
@@ -10,6 +11,8 @@ import { useLanguage } from '../contexts/LanguageContext';
 
 const HomePage = () => {
   const { t, language } = useLanguage();
+  const { lang } = useParams<{ lang: string }>();
+  const currentLang = lang || 'uz';
 
   const seoData = {
     uz: {
@@ -34,7 +37,7 @@ const HomePage = () => {
         title={seoData[language].title}
         description={seoData[language].description}
         keywords={seoData[language].keywords}
-        canonical="https://ishtopchi.uz/"
+        canonical={`https://ishtopchi.uz/${currentLang}`}
       />
       <Header />
       <HeroSection />

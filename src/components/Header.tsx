@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X, Globe, Sun, Moon, Briefcase } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
@@ -9,6 +9,8 @@ import ThemeToggle from './ThemeToggle';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { lang } = useParams<{ lang: string }>();
+  const currentLang = lang || 'uz';
   const { t } = useLanguage();
   const { theme } = useTheme();
 
@@ -18,7 +20,7 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="flex-shrink-0" aria-label="IshTopchi bosh sahifaga o'tish">
+            <Link to={`/${currentLang}`} className="flex-shrink-0" aria-label="IshTopchi bosh sahifaga o'tish">
               <motion.div 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -40,20 +42,20 @@ const Header: React.FC = () => {
           <nav className="hidden md:block" role="navigation" aria-label="Asosiy navigatsiya">
             <div className="ml-10 flex items-baseline space-x-4">
               <Link
-                to="/"
+                to={`/${currentLang}`}
                 className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
                 aria-current="page"
               >
                 {t('home')}
               </Link>
               <Link
-                to="/support"
+                to={`/${currentLang}/support`}
                 className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
               >
                 {t('support')}
               </Link>
               <Link
-                to="/marketing"
+                to={`/${currentLang}/marketing`}
                 className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
               >
                 {t('partnership')}
@@ -100,7 +102,7 @@ const Header: React.FC = () => {
             </div>
             <div className="border-t border-gray-200 dark:border-gray-700 my-2"></div>
             <Link
-              to="/"
+              to={`/${currentLang}`}
               className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
               onClick={() => setIsMenuOpen(false)}
               aria-current="page"
@@ -108,14 +110,14 @@ const Header: React.FC = () => {
               {t('home')}
             </Link>
             <Link
-              to="/support"
+              to={`/${currentLang}/support`}
               className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
               onClick={() => setIsMenuOpen(false)}
             >
               {t('support')}
             </Link>
             <Link
-              to="/marketing"
+              to={`/${currentLang}/marketing`}
               className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
               onClick={() => setIsMenuOpen(false)}
             >

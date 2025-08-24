@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowLeft, Shield, Eye, Lock, Users } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -11,6 +11,8 @@ import { useLanguage } from '../contexts/LanguageContext';
 
 const PrivacyPage = () => {
   const { t, language } = useLanguage();
+  const { lang } = useParams<{ lang: string }>();
+  const currentLang = lang || 'uz';
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
@@ -61,7 +63,7 @@ const PrivacyPage = () => {
         title={seoData[language].title}
         description={seoData[language].description}
         keywords={seoData[language].keywords}
-        canonical="https://ishtopchi.uz/privacy"
+        canonical={`https://ishtopchi.uz/${currentLang}/privacy`}
       />
       <Header />
       <div ref={ref} className="pt-16 min-h-screen bg-gradient-to-br from-slate-50 to-gray-100 dark:from-gray-900 dark:to-slate-800">
@@ -77,7 +79,7 @@ const PrivacyPage = () => {
               transition={{ type: "spring", stiffness: 400 }}
             >
               <Link
-                to="/"
+                to={`/${currentLang}`}
                 className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-4 transition-colors duration-200"
               >
                 <ArrowLeft className="h-5 w-5 mr-2" />

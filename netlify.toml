@@ -10,3 +10,25 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+# Language-based redirects
+[[redirects]]
+  from = "/"
+  to = "/uz"
+  status = 302
+
+# Old URLs redirect to new language-based URLs
+[[redirects]]
+  from = "/support"
+  to = "/uz/support"
+  status = 301
+
+[[redirects]]
+  from = "/marketing"
+  to = "/uz/marketing"
+  status = 301
+
+[[redirects]]
+  from = "/privacy"
+  to = "/uz/privacy"
+  status = 301

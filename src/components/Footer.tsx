@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Smartphone, Send, Instagram, Linkedin } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Footer = () => {
   const { t } = useLanguage();
+  const { lang } = useParams<{ lang: string }>();
+  const currentLang = lang || 'uz';
 
   return (
     <footer className="bg-gray-900 text-white py-16" role="contentinfo" aria-label="Sayt footer ma'lumotlari">
@@ -60,25 +62,25 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4" id="pages-heading">{t('pages')}</h3>
             <div className="space-y-2">
               <Link
-                to="/"
+                to={`/${currentLang}`}
                 className="block text-gray-400 hover:text-white transition-colors"
               >
                 {t('home')}
               </Link>
               <Link
-                to="/support"
+                to={`/${currentLang}/support`}
                 className="block text-gray-400 hover:text-white transition-colors"
               >
                 {t('support')}
               </Link>
               <Link
-                to="/marketing"
+                to={`/${currentLang}/marketing`}
                 className="block text-gray-400 hover:text-white transition-colors"
               >
                 {t('partnership')}
               </Link>
               <Link
-                to="/privacy"
+                to={`/${currentLang}/privacy`}
                 className="block text-gray-400 hover:text-white transition-colors"
               >
                 {t('privacyTitle')}
