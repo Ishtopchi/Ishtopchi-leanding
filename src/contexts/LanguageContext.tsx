@@ -151,7 +151,7 @@ const translations = {
     userRights: "Foydalanuvchi huquqlari",
     userRightsDesc: "Siz o'z ma'lumotlaringizni ko'rish, o'zgartirish va o'chirish huquqiga egasiz",
     contactSecurity: "Xavfsizlik bo'yicha aloqa",
-    securityEmail: "security@ishtopchi.uz",
+    securityEmail: "ishtopchi@gmail.com",
     reportVulnerability: "Xavfsizlik zaifliklarini xabar qilish"
   },
   
@@ -297,7 +297,7 @@ const translations = {
     userRights: "User Rights",
     userRightsDesc: "You have the right to view, modify and delete your data",
     contactSecurity: "Security Contact",
-    securityEmail: "security@ishtopchi.uz",
+    securityEmail: "ishtopchi@gmail.com",
     reportVulnerability: "Report Security Vulnerabilities"
   },
   
@@ -443,7 +443,7 @@ const translations = {
     userRights: "Права пользователей",
     userRightsDesc: "Вы имеете право просматривать, изменять и удалять свои данные",
     contactSecurity: "Контакт по безопасности",
-    securityEmail: "security@ishtopchi.uz",
+    securityEmail: "ishtopchi@gmail.com",
     reportVulnerability: "Сообщить об уязвимостях безопасности"
   }
 };
