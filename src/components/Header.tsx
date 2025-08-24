@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X, Globe, Sun, Moon, Briefcase } from 'lucide-react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
@@ -13,6 +13,15 @@ const Header: React.FC = () => {
   const currentLang = lang || 'uz';
   const { t } = useLanguage();
   const { theme } = useTheme();
+  const location = useLocation();
+
+  // Function to check if current path matches the nav item
+  const isActivePath = (path: string) => {
+    if (path === `/${currentLang}`) {
+      return location.pathname === `/${currentLang}` || location.pathname === `/${currentLang}/`;
+    }
+    return location.pathname === path;
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
@@ -43,20 +52,32 @@ const Header: React.FC = () => {
             <div className="ml-10 flex items-baseline space-x-4">
               <Link
                 to={`/${currentLang}`}
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                  isActivePath(`/${currentLang}`)
+                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+                }`}
                 aria-current="page"
               >
                 {t('home')}
               </Link>
               <Link
                 to={`/${currentLang}/support`}
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                  isActivePath(`/${currentLang}/support`)
+                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+                }`}
               >
                 {t('support')}
               </Link>
               <Link
                 to={`/${currentLang}/marketing`}
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                  isActivePath(`/${currentLang}/marketing`)
+                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+                }`}
               >
                 {t('partnership')}
               </Link>
@@ -103,7 +124,11 @@ const Header: React.FC = () => {
             <div className="border-t border-gray-200 dark:border-gray-700 my-2"></div>
             <Link
               to={`/${currentLang}`}
-              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
+              className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
+                isActivePath(`/${currentLang}`)
+                  ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                  : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+              }`}
               onClick={() => setIsMenuOpen(false)}
               aria-current="page"
             >
@@ -111,14 +136,22 @@ const Header: React.FC = () => {
             </Link>
             <Link
               to={`/${currentLang}/support`}
-              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
+              className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
+                isActivePath(`/${currentLang}/support`)
+                  ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                  : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+              }`}
               onClick={() => setIsMenuOpen(false)}
             >
               {t('support')}
             </Link>
             <Link
               to={`/${currentLang}/marketing`}
-              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
+              className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
+                isActivePath(`/${currentLang}/marketing`)
+                  ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                  : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+              }`}
               onClick={() => setIsMenuOpen(false)}
             >
               {t('partnership')}
