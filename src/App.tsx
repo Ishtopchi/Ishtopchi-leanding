@@ -7,7 +7,6 @@ import HomePage from './pages/HomePage';
 import SupportPage from './pages/SupportPage';
 import MarketingPage from './pages/MarketingPage';
 import PrivacyPage from './pages/PrivacyPage';
-import PrivacyPage from './pages/PrivacyPage';
 
 // Language wrapper component
 const LanguageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
