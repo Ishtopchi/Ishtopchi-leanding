@@ -15,6 +15,7 @@ const translations = {
     support: "Yordam",
     partnership: "Hamkorlik",
     privacy: "Maxfiylik siyosati",
+    privacy: "Maxfiylik siyosati",
     
     // Hero Section
     appName: "IshTopchi",
@@ -109,7 +110,26 @@ const translations = {
     purpose3: "Ish beruvchilar bilan bog'lanishni osonlashtirish",
     purpose4: "Ilova xavfsizligini ta'minlash",
     moreDetails: "Batafsil ma'lumot tez orada. Qo'shimcha savollar uchun ishtopchi@gmail.com manziliga murojaat qiling.",
-    lastUpdated: "Oxirgi yangilanish: Yanvar 2025"
+    lastUpdated: "Oxirgi yangilanish: Yanvar 2025",
+    
+    // Privacy Page
+    privacyTitle: "Maxfiylik siyosati",
+    privacyDescription: "IshTopchi sizning maxfiyligingizni himoya qilishga bag'ishlangan",
+    dataProtection: "Ma'lumotlarni himoya qilish",
+    dataProtectionDesc: "IshTopchi foydalanuvchilarning shaxsiy ma'lumotlarini himoya qilishni birinchi o'ringa qo'yadi.",
+    dataUsage: "Ma'lumotlardan foydalanish",
+    dataUsageDesc: "Sizning ma'lumotlaringiz faqat ish qidirish tajribasini yaxshilash uchun ishlatiladi.",
+    security: "Xavfsizlik",
+    securityDesc: "Barcha ma'lumotlar zamonaviy shifrlash usullari bilan himoyalangan.",
+    thirdParties: "Uchinchi shaxslar",
+    thirdPartiesDesc: "Sizning ma'lumotlaringiz roziligingizsiz uchinchi shaxslar bilan baham ko'rilmaydi.",
+    generalInfo: "Umumiy ma'lumot",
+    privacyContent1: "IshTopchi nozik shaxsiy ma'lumotlarni to'plamaydi yoki baham ko'rmaydi. Biz foydalanuvchilarning maxfiyligini hurmat qilamiz va ma'lumotlarni himoya qilishning eng yuqori standartlariga amal qilamiz.",
+    privacyContent2: "Sizning ma'lumotlaringiz faqat quyidagi maqsadlarda ishlatiladi:",
+    purpose1: "Ish qidirish tajribasini yaxshilash",
+    purpose2: "Tegishli ish imkoniyatlarini tavsiya qilish",
+    purpose3: "Ish beruvchilar bilan bog'lanishni osonlashtirish",
+    purpose4: "Ilova xavfsizligini ta'minlash"
   },
   
   en: {
@@ -117,6 +137,7 @@ const translations = {
     home: "Home",
     support: "Support",
     partnership: "Partnership",
+    privacy: "Privacy Policy",
     privacy: "Privacy Policy",
     
     // Hero Section
@@ -212,7 +233,26 @@ const translations = {
     purpose3: "Facilitating connections with employers",
     purpose4: "Ensuring application security",
     moreDetails: "More details coming soon. For additional questions, contact us at ishtopchi@gmail.com.",
-    lastUpdated: "Last updated: January 2025"
+    lastUpdated: "Last updated: January 2025",
+    
+    // Privacy Page
+    privacyTitle: "Privacy Policy",
+    privacyDescription: "IshTopchi is dedicated to protecting your privacy",
+    dataProtection: "Data Protection",
+    dataProtectionDesc: "IshTopchi prioritizes the protection of users' personal information.",
+    dataUsage: "Data Usage",
+    dataUsageDesc: "Your information is used solely to enhance the job search experience.",
+    security: "Security",
+    securityDesc: "All data is protected with modern encryption methods.",
+    thirdParties: "Third Parties",
+    thirdPartiesDesc: "Your data is not shared with third parties without your consent.",
+    generalInfo: "General Information",
+    privacyContent1: "IshTopchi does not collect or share sensitive personal data. We respect users' privacy and adhere to the highest standards of data protection.",
+    privacyContent2: "Your information is used only for the following purposes:",
+    purpose1: "Improving the job search experience",
+    purpose2: "Recommending relevant job opportunities",
+    purpose3: "Facilitating connections with employers",
+    purpose4: "Ensuring application security"
   },
   
   ru: {
@@ -220,6 +260,7 @@ const translations = {
     home: "Главная",
     support: "Поддержка",
     partnership: "Партнерство",
+    privacy: "Политика конфиденциальности",
     privacy: "Политика конфиденциальности",
     
     // Hero Section
@@ -315,7 +356,26 @@ const translations = {
     purpose3: "Облегчение связи с работодателями",
     purpose4: "Обеспечение безопасности приложения",
     moreDetails: "Подробности скоро появятся. По дополнительным вопросам обращайтесь по адресу ishtopchi@gmail.com.",
-    lastUpdated: "Последнее обновление: Январь 2025"
+    lastUpdated: "Последнее обновление: Январь 2025",
+    
+    // Privacy Page
+    privacyTitle: "Политика конфиденциальности",
+    privacyDescription: "IshTopchi заботится о защите вашей конфиденциальности",
+    dataProtection: "Защита данных",
+    dataProtectionDesc: "IshTopchi приоритизирует защиту личной информации пользователей.",
+    dataUsage: "Использование данных",
+    dataUsageDesc: "Ваша информация используется исключительно для улучшения опыта поиска работы.",
+    security: "Безопасность",
+    securityDesc: "Все данные защищены современными методами шифрования.",
+    thirdParties: "Третьи стороны",
+    thirdPartiesDesc: "Ваши данные не передаются третьим сторонам без вашего согласия.",
+    generalInfo: "Общая информация",
+    privacyContent1: "IshTopchi не собирает и не передает конфиденциальные персональные данные. Мы уважаем конфиденциальность пользователей и придерживаемся высочайших стандартов защиты данных.",
+    privacyContent2: "Ваша информация используется только для следующих целей:",
+    purpose1: "Улучшение опыта поиска работы",
+    purpose2: "Рекомендация подходящих вакансий",
+    purpose3: "Облегчение связи с работодателями",
+    purpose4: "Обеспечение безопасности приложения"
   }
 };
 
