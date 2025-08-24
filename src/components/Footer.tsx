@@ -91,6 +91,12 @@ const Footer = () => {
               >
                 {t('privacyTitle')}
               </Link>
+              <Link
+                to={`/${currentLang}/data-security`}
+                className="block text-gray-400 hover:text-white transition-colors"
+              >
+                {t('dataSecurityTitle')}
+              </Link>
             </div>
           </div>
           

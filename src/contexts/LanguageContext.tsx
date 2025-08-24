@@ -15,7 +15,7 @@ const translations = {
     support: "Yordam",
     partnership: "Hamkorlik",
     privacy: "Maxfiylik siyosati",
-    privacy: "Maxfiylik siyosati",
+    dataSecurity: "Ma'lumotlar xavfsizligi",
     
     // Hero Section
     appName: "IshTopchi",
@@ -129,7 +129,30 @@ const translations = {
     purpose1: "Ish qidirish tajribasini yaxshilash",
     purpose2: "Tegishli ish imkoniyatlarini tavsiya qilish",
     purpose3: "Ish beruvchilar bilan bog'lanishni osonlashtirish",
-    purpose4: "Ilova xavfsizligini ta'minlash"
+    purpose4: "Ilova xavfsizligini ta'minlash",
+    
+    // Data Security Page
+    dataSecurityTitle: "Ma'lumotlar xavfsizligi",
+    dataSecurityDescription: "IshTopchi sizning ma'lumotlaringizni eng yuqori darajada himoya qiladi",
+    encryption: "Shifrlash",
+    encryptionDesc: "Barcha ma'lumotlar AES-256 shifrlash algoritmi bilan himoyalangan",
+    secureStorage: "Xavfsiz saqlash",
+    secureStorageDesc: "Ma'lumotlar xavfsiz serverlar va bulut xizmatlarida saqlanadi",
+    accessControl: "Kirish nazorati",
+    accessControlDesc: "Faqat vakolatli xodimlar ma'lumotlarga kirish huquqiga ega",
+    regularAudits: "Muntazam tekshiruvlar",
+    regularAuditsDesc: "Xavfsizlik tizimi muntazam ravishda tekshiriladi va yangilanadi",
+    dataBackup: "Ma'lumotlar zaxirasi",
+    dataBackupDesc: "Barcha ma'lumotlar muntazam ravishda zaxiralanadi",
+    incidentResponse: "Hodisalarga javob",
+    incidentResponseDesc: "Xavfsizlik hodisalari uchun tezkor javob tizimi mavjud",
+    complianceStandards: "Standartlarga muvofiqlik",
+    complianceDesc: "Biz xalqaro ma'lumotlar himoyasi standartlariga amal qilamiz",
+    userRights: "Foydalanuvchi huquqlari",
+    userRightsDesc: "Siz o'z ma'lumotlaringizni ko'rish, o'zgartirish va o'chirish huquqiga egasiz",
+    contactSecurity: "Xavfsizlik bo'yicha aloqa",
+    securityEmail: "security@ishtopchi.uz",
+    reportVulnerability: "Xavfsizlik zaifliklarini xabar qilish"
   },
   
   en: {
@@ -138,7 +161,7 @@ const translations = {
     support: "Support",
     partnership: "Partnership",
     privacy: "Privacy Policy",
-    privacy: "Privacy Policy",
+    dataSecurity: "Data Security",
     
     // Hero Section
     appName: "IshTopchi",
@@ -252,7 +275,30 @@ const translations = {
     purpose1: "Improving the job search experience",
     purpose2: "Recommending relevant job opportunities",
     purpose3: "Facilitating connections with employers",
-    purpose4: "Ensuring application security"
+    purpose4: "Ensuring application security",
+    
+    // Data Security Page
+    dataSecurityTitle: "Data Security",
+    dataSecurityDescription: "IshTopchi protects your data at the highest level",
+    encryption: "Encryption",
+    encryptionDesc: "All data is protected with AES-256 encryption algorithm",
+    secureStorage: "Secure Storage",
+    secureStorageDesc: "Data is stored on secure servers and cloud services",
+    accessControl: "Access Control",
+    accessControlDesc: "Only authorized personnel have access to data",
+    regularAudits: "Regular Audits",
+    regularAuditsDesc: "Security system is regularly audited and updated",
+    dataBackup: "Data Backup",
+    dataBackupDesc: "All data is regularly backed up",
+    incidentResponse: "Incident Response",
+    incidentResponseDesc: "Rapid response system for security incidents",
+    complianceStandards: "Compliance Standards",
+    complianceDesc: "We comply with international data protection standards",
+    userRights: "User Rights",
+    userRightsDesc: "You have the right to view, modify and delete your data",
+    contactSecurity: "Security Contact",
+    securityEmail: "security@ishtopchi.uz",
+    reportVulnerability: "Report Security Vulnerabilities"
   },
   
   ru: {
@@ -261,7 +307,7 @@ const translations = {
     support: "Поддержка",
     partnership: "Партнерство",
     privacy: "Политика конфиденциальности",
-    privacy: "Политика конфиденциальности",
+    dataSecurity: "Безопасность данных",
     
     // Hero Section
     appName: "IshTopchi",
@@ -375,7 +421,30 @@ const translations = {
     purpose1: "Улучшение опыта поиска работы",
     purpose2: "Рекомендация подходящих вакансий",
     purpose3: "Облегчение связи с работодателями",
-    purpose4: "Обеспечение безопасности приложения"
+    purpose4: "Обеспечение безопасности приложения",
+    
+    // Data Security Page
+    dataSecurityTitle: "Безопасность данных",
+    dataSecurityDescription: "IshTopchi защищает ваши данные на высшем уровне",
+    encryption: "Шифрование",
+    encryptionDesc: "Все данные защищены алгоритмом шифрования AES-256",
+    secureStorage: "Безопасное хранение",
+    secureStorageDesc: "Данные хранятся на защищенных серверах и облачных сервисах",
+    accessControl: "Контроль доступа",
+    accessControlDesc: "Только авторизованный персонал имеет доступ к данным",
+    regularAudits: "Регулярные проверки",
+    regularAuditsDesc: "Система безопасности регулярно проверяется и обновляется",
+    dataBackup: "Резервное копирование",
+    dataBackupDesc: "Все данные регулярно резервируются",
+    incidentResponse: "Реагирование на инциденты",
+    incidentResponseDesc: "Система быстрого реагирования на инциденты безопасности",
+    complianceStandards: "Соответствие стандартам",
+    complianceDesc: "Мы соблюдаем международные стандарты защиты данных",
+    userRights: "Права пользователей",
+    userRightsDesc: "Вы имеете право просматривать, изменять и удалять свои данные",
+    contactSecurity: "Контакт по безопасности",
+    securityEmail: "security@ishtopchi.uz",
+    reportVulnerability: "Сообщить об уязвимостях безопасности"
   }
 };
 

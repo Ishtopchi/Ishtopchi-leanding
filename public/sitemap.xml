@@ -126,4 +126,35 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/ru/privacy" />
   </url>
   
+  <!-- Data Security Page -->
+  <url>
+    <loc>https://ishtopchi.uz/uz/data-security</loc>
+    <lastmod>2025-01-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ishtopchi.uz/uz/data-security" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ishtopchi.uz/en/data-security" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/ru/data-security" />
+  </url>
+  
+  <url>
+    <loc>https://ishtopchi.uz/en/data-security</loc>
+    <lastmod>2025-01-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ishtopchi.uz/uz/data-security" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ishtopchi.uz/en/data-security" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/ru/data-security" />
+  </url>
+  
+  <url>
+    <loc>https://ishtopchi.uz/ru/data-security</loc>
+    <lastmod>2025-01-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ishtopchi.uz/uz/data-security" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ishtopchi.uz/en/data-security" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ishtopchi.uz/ru/data-security" />
+  </url>
+  
 </urlset>

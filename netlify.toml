@@ -32,3 +32,8 @@
   from = "/privacy"
   to = "/uz/privacy"
   status = 301
+
+[[redirects]]
+  from = "/data-security"
+  to = "/uz/data-security"
+  status = 301

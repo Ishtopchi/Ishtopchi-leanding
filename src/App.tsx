@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 import SupportPage from './pages/SupportPage';
 import MarketingPage from './pages/MarketingPage';
 import PrivacyPage from './pages/PrivacyPage';
+import DataSecurityPage from './pages/DataSecurityPage';
 
 // Language wrapper component
 const LanguageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -60,6 +61,11 @@ function App() {
             <Route path="/:lang/privacy" element={
               <LanguageWrapper>
                 <PrivacyPage />
+              </LanguageWrapper>
+            } />
+            <Route path="/:lang/data-security" element={
+              <LanguageWrapper>
+                <DataSecurityPage />
               </LanguageWrapper>
             } />
             
