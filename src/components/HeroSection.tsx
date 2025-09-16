@@ -83,7 +83,7 @@ const HeroSection = () => {
                 boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
               }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => window.open('https://apps.apple.com/app/ishtopchi/id1234567890', '_blank')}
+              onClick={() => window.open('https://apps.apple.com/uz/app/ishtopchi/id6751149012', '_blank')}
               className="flex items-center space-x-4 bg-black text-white px-8 py-4 rounded-2xl font-medium hover:bg-gray-800 transition-all duration-500 shadow-xl transform-gpu"
               aria-label="App Store'dan yuklab olish"
               rel="noopener noreferrer"
