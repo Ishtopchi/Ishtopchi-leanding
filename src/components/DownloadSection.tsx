@@ -33,7 +33,7 @@ const DownloadSection = () => {
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
               transition={{ duration: 1.0, delay: 0.3, type: "spring", stiffness: 100 }}
-              onClick={() => window.open('https://play.google.com/store/apps/details?id=torex.top.ishtopchi', '_blank')}
+              onClick={() => window.open('https://apps.apple.com/uz/app/ishtopchi/id6751149012', '_blank')}
               className="flex items-center space-x-4 bg-black text-white px-8 py-4 rounded-2xl font-medium hover:bg-gray-800 transition-all duration-500 shadow-xl hover:shadow-2xl transform-gpu"
               aria-label="App Store'dan yuklab olish"
               rel="noopener noreferrer"
