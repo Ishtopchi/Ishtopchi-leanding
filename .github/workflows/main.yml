@@ -1,20 +1,25 @@
 name: Deploy
 
-# Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [main]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      # Step 1: Checkout the code on the GitHub runner (Highly Recommended)
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Use node (Optional, if you want to run build on the runner instead of remote)
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: '20' # Specify your required Node version
+
+      # Step 3: Deploy using SSH with a safer script
       - name: Deploy using ssh
         uses: appleboy/ssh-action@master
         with:
@@ -23,11 +28,35 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
+            # --- Setup and Build (Same as before) ---
             source ~/.nvm/nvm.sh
             cd /var/www/ishtopchi-landing-page
             git fetch origin
             git reset --hard origin/main
             npm install
             npm run build
-            rm -r /var/www/ishtopchi-uz/html/*
-            mv dist/* /var/www/ishtopchi-uz/html/
+            
+            # 1. Define the destination path for clarity
+            DEST_PATH="/var/www/ishtopchi-uz/html"
+            
+            # 2. Safely remove contents from the target directory
+            #    - Use find command which handles empty directories gracefully.
+            #    - Alternatively, use 'rm -rf $DEST_PATH/*' (more dangerous if $DEST_PATH is wrong)
+            echo "Attempting to safely clean up $DEST_PATH"
+            if [ -d "$DEST_PATH" ]; then
+                # Remove all files and directories *inside* html, but not the html directory itself
+                rm -rf $DEST_PATH/*
+                rm -rf $DEST_PATH/.[!.]* # Remove hidden files (like .htaccess)
+            else
+                # If the directory doesn't exist, create it (prevents mv failure)
+                echo "Destination path $DEST_PATH does not exist. Creating it."
+                mkdir -p $DEST_PATH
+            fi
+            
+            # 3. Move/Copy built files
+            #    - Using 'cp -r dist/* $DEST_PATH/' is safer than 'mv' because 'mv' requires the *target* directory to exist.
+            #    - The trailing slash on $DEST_PATH ensures we copy contents *into* the directory.
+            echo "Copying built files from dist/ to $DEST_PATH"
+            cp -r dist/* $DEST_PATH/
+            
+            echo "Deployment finished."
