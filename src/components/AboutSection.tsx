@@ -1,72 +1,45 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Eye, Filter, MessageCircle } from 'lucide-react';
+import { Eye, SlidersHorizontal, MessageCircle } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import SectionHeader from './ui/SectionHeader';
+import Reveal from './ui/Reveal';
 
 const AboutSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const { t } = useLanguage();
 
-  const features = [
-    {
-      icon: <Eye className="h-6 w-6" />,
-      text: t('viewJobsWithoutAccount')
-    },
-    {
-      icon: <Filter className="h-6 w-6" />,
-      text: t('filterJobs')
-    },
-    {
-      icon: <MessageCircle className="h-6 w-6" />,
-      text: t('directChat')
-    }
+  const items = [
+    { icon: Eye, text: t('viewJobsWithoutAccount') },
+    { icon: SlidersHorizontal, text: t('filterJobs') },
+    { icon: MessageCircle, text: t('directChat') },
   ];
 
   return (
-    <section ref={ref} className="py-20 bg-white dark:bg-gray-800" aria-label="Ilova haqida ma'lumot">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6" id="about-title">
-            {t('aboutTitle')}
-          </h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full" />
-        </motion.div>
+    <section className="border-t border-line/10 py-24 sm:py-28" aria-labelledby="about-title">
+      <div className="edge grid gap-14 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-5">
+          <SectionHeader
+            index="01"
+            eyebrow="Ilova haqida"
+            title={<span id="about-title">{t('aboutTitle')}</span>}
+          />
+        </div>
 
-        <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-              transition={{ duration: 0.8, delay: index * 0.2, type: "spring", stiffness: 80 }}
-              whileHover={{ 
-                scale: 1.05, 
-                y: -10,
-                transition: { duration: 0.3 }
-              }}
-              className="text-center"
-              role="article"
-            >
-              <motion.div 
-                whileHover={{ rotate: 360, scale: 1.1 }}
-                transition={{ duration: 0.6 }}
-                className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl mb-6"
-              >
-                <span aria-hidden="true">{feature.icon}</span>
-              </motion.div>
-              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                {feature.text}
-              </p>
-            </motion.div>
-          ))}
+        <div className="lg:col-span-7">
+          <ul className="divide-y divide-line/10 border-y border-line/10">
+            {items.map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <Reveal as="li" key={i} delay={i * 0.08}>
+                  <div className="group flex items-center gap-6 py-7 transition-transform duration-500 ease-signal hover:translate-x-1">
+                    <span className="font-mono text-xs text-ink-3">{`0${i + 1}`}</span>
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-line/12 bg-surface text-ink transition-colors duration-400 group-hover:border-accent group-hover:bg-accent group-hover:text-accent-contrast">
+                      <Icon className="h-5 w-5" />
+                    </span>
+                    <p className="text-lg leading-snug text-ink text-pretty">{item.text}</p>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </ul>
         </div>
       </div>
     </section>

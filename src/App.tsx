@@ -43,7 +43,7 @@ function App() {
     <ThemeProvider>
       <Router>
         <ScrollToTop />
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-gray-100 dark:from-gray-900 dark:to-slate-800">
+        <div className="min-h-screen bg-paper text-ink antialiased">
           <a href="#main-content" className="skip-link">
             Asosiy kontentga o'tish
           </a>
@@ -65,11 +65,6 @@ function App() {
             <Route path="/:lang/marketing" element={
               <LanguageWrapper>
                 <MarketingPage />
-              </LanguageWrapper>
-            } />
-            <Route path="/:lang/privacy" element={
-              <LanguageWrapper>
-                <PrivacyPage />
               </LanguageWrapper>
             } />
             <Route path="/:lang/privacy" element={

@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
-import { Menu, X, Globe, Sun, Moon, Briefcase } from 'lucide-react';
-import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { Menu, X } from 'lucide-react';
+import { Link, useParams, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
-import { useTheme } from '../contexts/ThemeContext';
-import LanguageSelector from './LanguageSelector';
 import ThemeToggle from './ThemeToggle';
+import LanguageSelector from './LanguageSelector';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { lang } = useParams<{ lang: string }>();
   const currentLang = lang || 'uz';
   const { t } = useLanguage();
-  const { theme } = useTheme();
   const location = useLocation();
 
-  // Function to check if current path matches the nav item
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const isActivePath = (path: string) => {
     if (path === `/${currentLang}`) {
       return location.pathname === `/${currentLang}` || location.pathname === `/${currentLang}/`;
@@ -23,142 +28,125 @@ const Header: React.FC = () => {
     return location.pathname === path;
   };
 
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex items-center">
-            <Link to={`/${currentLang}`} className="flex-shrink-0" aria-label="IshTopchi bosh sahifaga o'tish">
-              <motion.div 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center space-x-2"
-              >
-                <img 
-                  src="/logo.jpg" 
-                  alt="IshTopchi Logo" 
-                  className="w-10 h-10 rounded-xl object-cover"
-                />
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  IshTopchi
-                </h1>
-              </motion.div>
-            </Link>
-          </div>
+  const navItems = [
+    { to: `/${currentLang}`, label: t('home') },
+    { to: `/${currentLang}/support`, label: t('support') },
+    { to: `/${currentLang}/marketing`, label: t('partnership') },
+  ];
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:block" role="navigation" aria-label="Asosiy navigatsiya">
-            <div className="ml-10 flex items-baseline space-x-4">
-              <Link
-                to={`/${currentLang}`}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                  isActivePath(`/${currentLang}`)
-                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
-                }`}
-                aria-current="page"
-              >
-                {t('home')}
-              </Link>
-              <Link
-                to={`/${currentLang}/support`}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                  isActivePath(`/${currentLang}/support`)
-                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
-                }`}
-              >
-                {t('support')}
-              </Link>
-              <Link
-                to={`/${currentLang}/marketing`}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                  isActivePath(`/${currentLang}/marketing`)
-                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
-                }`}
-              >
-                {t('partnership')}
-              </Link>
-            </div>
+  return (
+    <header className="fixed inset-x-0 top-0 z-50">
+      <div
+        className={`transition-colors duration-500 ease-signal ${
+          scrolled ? 'border-b border-line/10 bg-paper/80 backdrop-blur-xl' : 'border-b border-transparent bg-transparent'
+        }`}
+      >
+        <div className="edge flex h-16 items-center justify-between">
+          {/* Wordmark */}
+          <Link to={`/${currentLang}`} aria-label="IshTopchi — bosh sahifa" className="group flex items-center gap-2.5">
+            <motion.img
+              whileHover={{ rotate: -6 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+              src="/logo.jpg"
+              alt=""
+              className="h-8 w-8 rounded-lg object-cover ring-1 ring-line/10"
+            />
+            <span className="font-display text-xl font-bold lowercase tracking-tight text-ink">
+              ishtopchi
+            </span>
+          </Link>
+
+          {/* Desktop nav */}
+          <nav className="hidden items-center gap-1 md:flex" aria-label="Asosiy navigatsiya">
+            {navItems.map((item) => {
+              const active = isActivePath(item.to);
+              return (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  aria-current={active ? 'page' : undefined}
+                  className={`relative rounded-full px-4 py-2 text-sm font-medium transition-colors duration-300 ${
+                    active ? 'text-ink' : 'text-ink-2 hover:text-ink'
+                  }`}
+                >
+                  {active && (
+                    <motion.span
+                      layoutId="nav-pill"
+                      className="absolute inset-0 -z-10 rounded-full bg-ink/[0.06] ring-1 ring-line/10"
+                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                    />
+                  )}
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
 
-          {/* Desktop Theme and Language Controls */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Controls */}
+          <div className="hidden items-center gap-2.5 md:flex">
             <ThemeToggle />
             <LanguageSelector />
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-2">
+          {/* Mobile controls */}
+          <div className="flex items-center gap-2.5 md:hidden">
             <LanguageSelector />
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 transition-colors duration-200"
+              onClick={() => setIsMenuOpen((v) => !v)}
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-line/15 bg-surface text-ink transition-colors hover:border-accent/50 hover:text-accent"
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
               aria-label="Menyuni ochish/yopish"
             >
-              {isMenuOpen ? (
-                <X className="block h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="block h-6 w-6" aria-hidden="true" />
-              )}
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
       </div>
 
       {/* Mobile menu */}
-      {isMenuOpen && (
-        <div className="md:hidden" id="mobile-menu" role="navigation" aria-label="Mobil navigatsiya">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
-            {/* Theme toggle in mobile menu */}
-            <div className="px-3 py-2 flex items-center justify-between">
-              <span className="text-gray-700 dark:text-gray-300 text-base font-medium">
-                {t('theme') || 'Theme'}
-              </span>
-              <ThemeToggle />
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            id="mobile-menu"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden border-b border-line/10 bg-paper/95 backdrop-blur-xl md:hidden"
+            role="navigation"
+            aria-label="Mobil navigatsiya"
+          >
+            <div className="edge flex flex-col gap-1 py-4">
+              {navItems.map((item, i) => (
+                <motion.div
+                  key={item.to}
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.05 + i * 0.05 }}
+                >
+                  <Link
+                    to={item.to}
+                    onClick={() => setIsMenuOpen(false)}
+                    aria-current={isActivePath(item.to) ? 'page' : undefined}
+                    className={`block rounded-xl px-4 py-3 text-base font-medium transition-colors ${
+                      isActivePath(item.to)
+                        ? 'bg-ink/[0.06] text-ink'
+                        : 'text-ink-2 hover:bg-ink/5 hover:text-ink'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
+              ))}
+              <div className="mt-2 flex items-center justify-between border-t border-line/10 px-4 pt-4">
+                <span className="text-sm font-medium text-ink-2">{t('theme') || 'Theme'}</span>
+                <ThemeToggle />
+              </div>
             </div>
-            <div className="border-t border-gray-200 dark:border-gray-700 my-2"></div>
-            <Link
-              to={`/${currentLang}`}
-              className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
-                isActivePath(`/${currentLang}`)
-                  ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
-                  : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-              aria-current="page"
-            >
-              {t('home')}
-            </Link>
-            <Link
-              to={`/${currentLang}/support`}
-              className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
-                isActivePath(`/${currentLang}/support`)
-                  ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
-                  : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {t('support')}
-            </Link>
-            <Link
-              to={`/${currentLang}/marketing`}
-              className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
-                isActivePath(`/${currentLang}/marketing`)
-                  ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
-                  : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {t('partnership')}
-            </Link>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

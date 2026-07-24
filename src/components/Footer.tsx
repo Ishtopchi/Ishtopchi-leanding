@@ -1,6 +1,5 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import { Smartphone, Send, Instagram, Linkedin } from 'lucide-react';
+import { Send, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -9,105 +8,108 @@ const Footer = () => {
   const { lang } = useParams<{ lang: string }>();
   const currentLang = lang || 'uz';
 
+  const socials = [
+    { href: 'https://t.me/ishtopchi', label: 'Telegram', Icon: Send },
+    { href: 'https://www.instagram.com/ishtopchi/', label: 'Instagram', Icon: Instagram },
+    { href: 'https://www.linkedin.com/company/ishtopchi', label: 'LinkedIn', Icon: Linkedin },
+  ];
+
+  const pageLinks = [
+    { to: `/${currentLang}`, label: t('home') },
+    { to: `/${currentLang}/support`, label: t('support') },
+    { to: `/${currentLang}/marketing`, label: t('partnership') },
+    { to: `/${currentLang}/privacy`, label: t('privacyTitle') },
+    { to: `/${currentLang}/data-security`, label: t('dataSecurityTitle') },
+  ];
+
+  const contacts = [
+    { Icon: Mail, value: 'ishtopchi@gmail.com', href: 'mailto:ishtopchi@gmail.com' },
+    { Icon: Phone, value: '+998 77 055 01 25', href: 'tel:+998770550125' },
+    { Icon: MapPin, value: "Toshkent, O'zbekiston", href: undefined },
+  ];
+
   return (
-    <footer className="bg-gray-900 text-white py-16" role="contentinfo" aria-label="Sayt footer ma'lumotlari">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-4 gap-8 mb-12">
-          <div className="md:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <Smartphone className="h-8 w-8 text-blue-400" aria-hidden="true" />
-              <span className="text-2xl font-bold">{t('appName')}</span>
-            </div>
-            <p className="text-gray-400 mb-6 max-w-md leading-relaxed">
+    <footer className="relative overflow-hidden border-t border-line/10 bg-surface" role="contentinfo">
+      <div className="edge py-16 sm:py-20">
+        <div className="grid gap-12 md:grid-cols-12">
+          {/* Brand */}
+          <div className="md:col-span-5">
+            <Link to={`/${currentLang}`} className="flex items-center gap-2.5" aria-label="IshTopchi">
+              <img src="/logo.jpg" alt="" className="h-9 w-9 rounded-lg object-cover ring-1 ring-line/10" />
+              <span className="font-display text-2xl font-bold lowercase tracking-tight text-ink">
+                ishtopchi
+              </span>
+            </Link>
+            <p className="mt-5 max-w-sm leading-relaxed text-ink-2 text-pretty">
               {t('footerDescription')}
             </p>
-            <div className="flex space-x-4">
-              <motion.a
-                href="https://t.me/ishtopchi"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Telegram kanalimizga obuna bo'ling"
-                title="Telegram"
-                whileHover={{ scale: 1.1, y: -2 }}
-                className="bg-gray-800 p-3 rounded-full hover:bg-gray-700 transition-colors"
-              >
-                <Send className="h-5 w-5 text-blue-400" />
-              </motion.a>
-              <motion.a
-                href="https://www.instagram.com/ishtopchi/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram sahifamizni kuzatib boring"
-                title="Instagram"
-                whileHover={{ scale: 1.1, y: -2 }}
-                className="bg-gray-800 p-3 rounded-full hover:bg-gray-700 transition-colors"
-              >
-                <Instagram className="h-5 w-5 text-pink-400" />
-              </motion.a>
-              <motion.a
-                href="https://www.linkedin.com/company/ishtopchi"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn sahifamizni kuzatib boring"
-                title="LinkedIn"
-                whileHover={{ scale: 1.1, y: -2 }}
-                className="bg-gray-800 p-3 rounded-full hover:bg-gray-700 transition-colors"
-              >
-                <Linkedin className="h-5 w-5 text-blue-400" />
-              </motion.a>
+            <div className="mt-7 flex gap-3">
+              {socials.map(({ href, label, Icon }) => (
+                <motion.a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  title={label}
+                  whileHover={{ y: -3 }}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-line/12 bg-surface-2 text-ink-2 transition-colors duration-300 hover:border-accent hover:text-accent"
+                >
+                  <Icon className="h-[1.15rem] w-[1.15rem]" />
+                </motion.a>
+              ))}
             </div>
           </div>
-          
-          <div>
-            <h3 className="text-lg font-semibold mb-4" id="pages-heading">{t('pages')}</h3>
-            <div className="space-y-2">
-              <Link
-                to={`/${currentLang}`}
-                className="block text-gray-400 hover:text-white transition-colors"
-              >
-                {t('home')}
-              </Link>
-              <Link
-                to={`/${currentLang}/support`}
-                className="block text-gray-400 hover:text-white transition-colors"
-              >
-                {t('support')}
-              </Link>
-              <Link
-                to={`/${currentLang}/marketing`}
-                className="block text-gray-400 hover:text-white transition-colors"
-              >
-                {t('partnership')}
-              </Link>
-              <Link
-                to={`/${currentLang}/privacy`}
-                className="block text-gray-400 hover:text-white transition-colors"
-              >
-                {t('privacyTitle')}
-              </Link>
-              <Link
-                to={`/${currentLang}/data-security`}
-                className="block text-gray-400 hover:text-white transition-colors"
-              >
-                {t('dataSecurityTitle')}
-              </Link>
-            </div>
-          </div>
-          
-          <div>
-            <h3 className="text-lg font-semibold mb-4" id="contact-heading">{t('contact')}</h3>
-            <div className="space-y-2 text-gray-400">
-              <p>ishtopchi@gmail.com</p>
-              <p>+998 77 055 01 25</p>
-              <p>Toshkent, O'zbekiston</p>
-            </div>
+
+          {/* Pages */}
+          <nav className="md:col-span-3" aria-label={t('pages')}>
+            <h3 className="eyebrow" id="pages-heading">{t('pages')}</h3>
+            <ul className="mt-5 space-y-3">
+              {pageLinks.map((l) => (
+                <li key={l.to}>
+                  <Link
+                    to={l.to}
+                    className="group inline-flex items-center gap-2 text-ink-2 transition-colors duration-200 hover:text-ink"
+                  >
+                    <span className="h-px w-0 bg-accent transition-all duration-300 group-hover:w-4" />
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Contact */}
+          <div className="md:col-span-4">
+            <h3 className="eyebrow" id="contact-heading">{t('contact')}</h3>
+            <ul className="mt-5 space-y-3">
+              {contacts.map(({ Icon, value, href }) => (
+                <li key={value}>
+                  {href ? (
+                    <a
+                      href={href}
+                      className="flex items-center gap-3 text-ink-2 transition-colors duration-200 hover:text-ink"
+                    >
+                      <Icon className="h-4 w-4 text-ink-3" />
+                      {value}
+                    </a>
+                  ) : (
+                    <span className="flex items-center gap-3 text-ink-2">
+                      <Icon className="h-4 w-4 text-ink-3" />
+                      {value}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-        
-        <div className="pt-8 border-t border-gray-800 text-center">
-          <p className="text-gray-400">
+
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-line/10 pt-8 sm:flex-row">
+          <p className="font-mono text-xs tracking-wide text-ink-3">
             © 2025 {t('appName')}. {t('allRightsReserved')}
           </p>
+          <p className="font-mono text-xs tracking-wide text-ink-3">Toshkent · O'zbekiston</p>
         </div>
       </div>
     </footer>

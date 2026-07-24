@@ -1,83 +1,93 @@
-import React, { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Globe, ChevronDown } from 'lucide-react';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { ChevronDown } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage, Language } from '../contexts/LanguageContext';
+
+const languages = [
+  { code: 'uz' as Language, name: "O'zbek", short: 'UZ' },
+  { code: 'en' as Language, name: 'English', short: 'EN' },
+  { code: 'ru' as Language, name: 'Русский', short: 'RU' },
+];
 
 const LanguageSelector = () => {
   const { language, setLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const { lang } = useParams<{ lang: string }>();
+  const wrapRef = useRef<HTMLDivElement>(null);
 
-  const languages = [
-    { code: 'uz' as Language, name: 'O\'zbek', flag: '🇺🇿' },
-    { code: 'en' as Language, name: 'English', flag: '🇺🇸' },
-    { code: 'ru' as Language, name: 'Русский', flag: '🇷🇺' }
-  ];
-
-  const currentLanguage = languages.find(lang => lang.code === language);
+  const current = languages.find((l) => l.code === language);
 
   const handleLanguageChange = (newLang: Language) => {
     setLanguage(newLang);
     setIsOpen(false);
-    
-    // Get current path without language prefix
     const pathWithoutLang = location.pathname.replace(/^\/[a-z]{2}/, '') || '';
-    
-    // Navigate to new language path
     navigate(`/${newLang}${pathWithoutLang}`);
   };
+
+  // Close on outside click
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) setIsOpen(false);
+    };
+    document.addEventListener('mousedown', onClick);
+    return () => document.removeEventListener('mousedown', onClick);
+  }, []);
+
   return (
-    <div className="relative">
+    <div className="relative" ref={wrapRef}>
       <motion.button
-        whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm border border-white/20 dark:border-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-white/20 dark:hover:bg-gray-700/50 transition-all duration-300"
+        onClick={() => setIsOpen((v) => !v)}
+        className="flex items-center gap-2 rounded-full border border-line/15 bg-surface px-3.5 py-2 font-mono text-xs font-medium tracking-[0.12em] text-ink transition-colors duration-300 hover:border-accent/50 hover:text-accent"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         aria-label="Tilni tanlash"
         title="Tilni tanlash"
       >
-        <Globe className="h-4 w-4" aria-hidden="true" />
-        <span className="text-sm font-medium">{currentLanguage?.flag}</span>
-        <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
+        <span>{current?.short}</span>
+        <ChevronDown
+          className={`h-3.5 w-3.5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+          aria-hidden="true"
+        />
       </motion.button>
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+          <motion.ul
+            initial={{ opacity: 0, y: -8, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -10, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-            className="absolute top-full mt-2 right-0 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden z-50 min-w-[140px]"
+            exit={{ opacity: 0, y: -8, scale: 0.96 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute right-0 top-full z-50 mt-2 min-w-[168px] overflow-hidden rounded-2xl border border-line/12 bg-surface-2 p-1.5 shadow-2xl shadow-ink/10"
             role="listbox"
             aria-label="Tillar ro'yxati"
             id="language-menu"
           >
-            {languages.map((lang) => (
-              <motion.button
-                key={lang.code}
-                whileHover={{ backgroundColor: 'rgba(59, 130, 246, 0.1)' }}
-                onClick={() => {
-                  handleLanguageChange(lang.code);
-                }}
-                role="option"
-                aria-selected={language === lang.code}
-                className={`w-full px-4 py-3 text-left flex items-center space-x-3 transition-colors ${
-                  language === lang.code 
-                    ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400' 
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
-                }`}
-              >
-                <span className="text-lg">{lang.flag}</span>
-                <span className="text-sm font-medium" lang={lang.code}>{lang.name}</span>
-              </motion.button>
-            ))}
-          </motion.div>
+            {languages.map((l) => {
+              const active = language === l.code;
+              return (
+                <li key={l.code} role="option" aria-selected={active}>
+                  <button
+                    onClick={() => handleLanguageChange(l.code)}
+                    className={`flex w-full items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-left transition-colors duration-200 ${
+                      active
+                        ? 'bg-accent/10 text-accent'
+                        : 'text-ink-2 hover:bg-ink/5 hover:text-ink'
+                    }`}
+                  >
+                    <span className="text-sm font-medium" lang={l.code}>
+                      {l.name}
+                    </span>
+                    <span className="font-mono text-[0.65rem] tracking-[0.15em] opacity-60">
+                      {l.short}
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </motion.ul>
         )}
       </AnimatePresence>
     </div>

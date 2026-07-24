@@ -1,31 +1,34 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useTheme();
+  const isDark = theme === 'dark';
 
   return (
     <motion.button
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+      whileTap={{ scale: 0.9 }}
       onClick={toggleTheme}
-      className="relative p-2 rounded-lg bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm border border-white/20 dark:border-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-white/20 dark:hover:bg-gray-700/50 transition-all duration-300"
-      aria-label={theme === 'light' ? 'Qorong\'u rejimga o\'tish' : 'Yorug\' rejimga o\'tish'}
-      title={theme === 'light' ? 'Qorong\'u rejimga o\'tish' : 'Yorug\' rejimga o\'tish'}
+      className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-line/15 bg-surface text-ink transition-colors duration-300 hover:border-accent/50 hover:text-accent"
+      aria-label={isDark ? "Yorug' rejimga o'tish" : "Qorong'u rejimga o'tish"}
+      title={isDark ? "Yorug' rejimga o'tish" : "Qorong'u rejimga o'tish"}
     >
-      <motion.div
-        initial={false}
-        animate={{ rotate: theme === 'dark' ? 180 : 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        {theme === 'light' ? (
-          <Sun className="h-5 w-5" aria-hidden="true" />
-        ) : (
-          <Moon className="h-5 w-5" aria-hidden="true" />
-        )}
-      </motion.div>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={theme}
+          initial={{ y: 14, opacity: 0, rotate: -40 }}
+          animate={{ y: 0, opacity: 1, rotate: 0 }}
+          exit={{ y: -14, opacity: 0, rotate: 40 }}
+          transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {isDark ? (
+            <Moon className="h-[1.05rem] w-[1.05rem]" aria-hidden="true" />
+          ) : (
+            <Sun className="h-[1.05rem] w-[1.05rem]" aria-hidden="true" />
+          )}
+        </motion.span>
+      </AnimatePresence>
     </motion.button>
   );
 };

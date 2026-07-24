@@ -2,41 +2,199 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Performance optimizations */
-* {
-  box-sizing: border-box;
+/* ============================================================
+   IshTopchi — "Signal" design system
+   Palette grounded in the wordmark: navy ink + warm stone paper,
+   one electric ultramarine accent. Dark mode inverts to a navy world.
+   ============================================================ */
+@layer base {
+  :root {
+    --paper: 236 234 225;        /* #ECEAE1 warm stone */
+    --surface: 244 242 235;      /* #F4F2EB */
+    --surface-2: 251 250 245;    /* #FBFAF5 */
+    --ink: 19 28 43;             /* #131C2B deep navy */
+    --ink-2: 74 84 99;           /* #4A5463 */
+    --ink-3: 122 131 145;        /* #7A8391 */
+    --line: 19 28 43;            /* used with /alpha */
+    --accent: 47 67 255;         /* #2F43FF ultramarine */
+    --accent-2: 30 47 224;       /* #1E2FE0 */
+    --accent-contrast: 247 247 255;
+    --grain-opacity: 0.035;
+    color-scheme: light;
+  }
+
+  .dark {
+    --paper: 11 18 32;           /* #0B1220 navy-black */
+    --surface: 17 26 42;         /* #111A2A */
+    --surface-2: 22 32 47;       /* #16202F */
+    --ink: 236 234 225;          /* stone becomes the text — ties back to logo */
+    --ink-2: 154 166 182;        /* #9AA6B6 */
+    --ink-3: 107 118 134;        /* #6B7686 */
+    --line: 236 234 225;
+    --accent: 108 124 255;       /* #6C7CFF lighter for dark bg */
+    --accent-2: 138 150 255;
+    --accent-contrast: 8 12 22;
+    --grain-opacity: 0.05;
+    color-scheme: dark;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: rgb(var(--paper));
+    color: rgb(var(--ink));
+    font-family: 'Inter', system-ui, sans-serif;
+    font-feature-settings: 'cv11', 'ss01';
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    transition: background-color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  ::selection {
+    background: rgb(var(--accent) / 0.9);
+    color: rgb(var(--accent-contrast));
+  }
+
+  /* Themed scrollbar */
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--paper));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--ink) / 0.18);
+    border: 3px solid rgb(var(--paper));
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--ink) / 0.32);
+  }
 }
 
-/* Reduce motion for users who prefer it */
+@layer components {
+  /* Section shell — consistent horizontal rhythm */
+  .edge {
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 3rem);
+  }
+
+  /* Mono eyebrow / label — the "engineered" texture */
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgb(var(--ink-3));
+  }
+
+  /* Display headings */
+  .display {
+    font-family: 'Inter Tight', 'Inter', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+  }
+
+  /* Hairline hover card */
+  .card-line {
+    background: rgb(var(--surface));
+    border: 1px solid rgb(var(--line) / 0.1);
+    border-radius: 14px;
+    transition: border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@layer utilities {
+  /* Fine background grid */
+  .bg-grid {
+    background-image: linear-gradient(rgb(var(--ink) / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--ink) / 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  /* Subtle film grain via SVG noise */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Vertical fade mask for tickers */
+  .mask-fade-y {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+  }
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .pause-on-hover:hover * {
+    animation-play-state: paused;
+  }
+}
+
+/* Accessibility: honor reduced motion */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }
 
-/* Focus styles for accessibility */
+/* Focus ring */
 :focus-visible {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
+  outline: 2px solid rgb(var(--accent));
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
-/* Skip link for screen readers */
+/* Skip link */
 .skip-link {
   position: absolute;
-  top: -40px;
-  left: 6px;
-  background: #000;
-  color: #fff;
-  padding: 8px;
-  text-decoration: none;
+  top: -48px;
+  left: 12px;
   z-index: 1000;
+  background: rgb(var(--ink));
+  color: rgb(var(--paper));
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: top 0.25s ease;
 }
-
 .skip-link:focus {
-  top: 6px;
+  top: 12px;
 }

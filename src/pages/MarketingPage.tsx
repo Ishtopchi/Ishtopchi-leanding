@@ -1,14 +1,13 @@
-import React from 'react';
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { AnimatePresence } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { ArrowLeft, Users, TrendingUp, Target, Handshake, Phone, X } from 'lucide-react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Users, TrendingUp, Target, Handshake, Phone, X, Check } from 'lucide-react';
+import { useParams } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Reveal from '../components/ui/Reveal';
+import PageIntro from '../components/ui/PageIntro';
+import MagneticButton from '../components/ui/MagneticButton';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const MarketingPage = () => {
@@ -16,8 +15,6 @@ const MarketingPage = () => {
   const { lang } = useParams<{ lang: string }>();
   const currentLang = lang || 'uz';
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   const seoData = {
     uz: {
@@ -38,22 +35,13 @@ const MarketingPage = () => {
   };
 
   const benefits = [
-    {
-      icon: <Users className="h-8 w-8" />,
-      title: t('wideAudience'),
-      description: t('wideAudienceDesc')
-    },
-    {
-      icon: <TrendingUp className="h-8 w-8" />,
-      title: t('highConversion'),
-      description: t('highConversionDesc')
-    },
-    {
-      icon: <Target className="h-8 w-8" />,
-      title: t('preciseTargeting'),
-      description: t('preciseTargetingDesc')
-    }
+    { icon: Users, title: t('wideAudience'), description: t('wideAudienceDesc') },
+    { icon: TrendingUp, title: t('highConversion'), description: t('highConversionDesc') },
+    { icon: Target, title: t('preciseTargeting'), description: t('preciseTargetingDesc') },
   ];
+
+  const employerList = [t('freeJobPosting'), t('directChatWithCandidates'), t('flexibleFilters'), t('analyticsReports')];
+  const premiumList = [t('promoteListings'), t('customDesign'), t('extendedAnalytics'), t('personalSupport')];
 
   return (
     <div>
@@ -64,248 +52,162 @@ const MarketingPage = () => {
         canonical={`https://ishtopchi.uz/${currentLang}/marketing`}
       />
       <Header />
-      <div ref={ref} className="pt-16 min-h-screen bg-gradient-to-br from-slate-50 to-gray-100 dark:from-gray-900 dark:to-slate-800">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
-            className="mb-12"
-          >
-            <motion.div
-              whileHover={{ x: 5 }}
-              transition={{ type: "spring", stiffness: 400 }}
-            >
-              <Link
-                to={`/${currentLang}`}
-                className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-6 transition-colors duration-200"
-              >
-                <ArrowLeft className="h-5 w-5 mr-2" />
-                {t('backToHome')}
-              </Link>
-            </motion.div>
-            <div className="text-center">
-              <motion.h1 
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 100 }}
-                className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6"
-              >
-                {t('marketingTitle')}
-              </motion.h1>
-              <motion.p 
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
-              >
-                {t('marketingDescription')}
-              </motion.p>
-            </div>
-          </motion.div>
+      <main className="min-h-screen pt-32">
+        <div className="edge pb-24">
+          <PageIntro
+            backTo={`/${currentLang}`}
+            backLabel={t('backToHome')}
+            eyebrow={t('partnership')}
+            title={t('marketingTitle')}
+            description={t('marketingDescription')}
+            align="center"
+          />
 
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                transition={{ duration: 0.8, delay: 0.6 + index * 0.2, type: "spring", stiffness: 100 }}
-                whileHover={{ 
-                  y: -15, 
-                  scale: 1.08,
-                  rotateY: 5,
-                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
-                }}
-                className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform-gpu"
-              >
-                <motion.div
-                  whileHover={{ rotate: 360, scale: 1.1 }}
-                  transition={{ duration: 0.6 }}
-                  className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl mb-6"
+          {/* Benefits */}
+          <div className="mt-16 grid gap-4 md:grid-cols-3">
+            {benefits.map((b, i) => {
+              const Icon = b.icon;
+              return (
+                <Reveal key={i} delay={i * 0.08}>
+                  <article className="card-line group h-full p-8 hover:-translate-y-1.5 hover:border-accent/50">
+                    <div className="flex items-center justify-between">
+                      <span className="flex h-14 w-14 items-center justify-center rounded-2xl border border-line/12 bg-surface-2 text-ink transition-all duration-500 ease-signal group-hover:border-accent group-hover:bg-accent group-hover:text-accent-contrast group-hover:-rotate-6">
+                        <Icon className="h-6 w-6" />
+                      </span>
+                      <span className="font-mono text-xs text-ink-3">{`0${i + 1}`}</span>
+                    </div>
+                    <h2 className="display mt-7 text-xl text-ink">{b.title}</h2>
+                    <p className="mt-3 leading-relaxed text-ink-2 text-pretty">{b.description}</p>
+                  </article>
+                </Reveal>
+              );
+            })}
+          </div>
+
+          {/* Partnership CTA */}
+          <Reveal className="mt-4">
+            <div className="relative isolate overflow-hidden rounded-[28px] bg-[#0B1220] px-6 py-16 text-center sm:px-16">
+              <div className="dark pointer-events-none absolute inset-0" aria-hidden="true">
+                <div
+                  className="absolute inset-0 bg-grid opacity-60"
+                  style={{
+                    maskImage: 'radial-gradient(90% 90% at 50% 0%, #000, transparent 70%)',
+                    WebkitMaskImage: 'radial-gradient(90% 90% at 50% 0%, #000, transparent 70%)',
+                  }}
+                />
+                <div className="absolute -top-16 left-1/2 h-80 w-[34rem] -translate-x-1/2 rounded-full bg-[#6C7CFF]/25 blur-[120px] animate-aurora" />
+              </div>
+              <div className="relative z-10 mx-auto max-w-2xl">
+                <span className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[#ECEAE1] text-[#0B1220]">
+                  <Handshake className="h-7 w-7" />
+                </span>
+                <h2 className="display mt-8 text-3xl text-[#ECEAE1] sm:text-5xl text-balance">{t('startPartnership')}</h2>
+                <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-[#ECEAE1]/70 text-pretty">{t('partnershipDesc')}</p>
+                <MagneticButton
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => setIsContactDialogOpen(true)}
+                  className="mt-9 inline-flex items-center gap-2 rounded-full bg-[#ECEAE1] px-8 py-3.5 font-display font-semibold text-[#0B1220] transition-colors duration-300 hover:bg-white"
                 >
-                  {benefit.icon}
-                </motion.div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-                  {benefit.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {benefit.description}
-                </p>
-              </motion.div>
+                  {t('contactUs')}
+                </MagneticButton>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Two lists */}
+          <div className="mt-16 grid gap-12 md:grid-cols-2">
+            {[
+              { title: t('forEmployers'), items: employerList },
+              { title: t('premiumServices'), items: premiumList },
+            ].map((col, ci) => (
+              <Reveal key={ci} delay={ci * 0.1}>
+                <div>
+                  <h3 className="display text-2xl text-ink">{col.title}</h3>
+                  <ul className="mt-6 divide-y divide-line/10 border-y border-line/10">
+                    {col.items.map((item, idx) => (
+                      <li key={idx} className="group flex items-center gap-4 py-4 transition-transform duration-400 hover:translate-x-1">
+                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-line/12 text-ink-3 transition-colors duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-accent-contrast">
+                          <Check className="h-3.5 w-3.5" />
+                        </span>
+                        <span className="text-ink-2 group-hover:text-ink">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
             ))}
           </div>
+        </div>
+      </main>
+      <Footer />
 
+      {/* Contact dialog */}
+      <AnimatePresence>
+        {isContactDialogOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.8, delay: 1.2, type: "spring", stiffness: 100 }}
-            className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-white text-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-ink/50 p-4 backdrop-blur-md"
+            onClick={() => setIsContactDialogOpen(false)}
+            role="dialog"
+            aria-modal="true"
           >
             <motion.div
-              whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, scale: 0.94, y: 24 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.94, y: 24 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+              className="w-full max-w-md rounded-[24px] border border-line/12 bg-surface-2 p-8 shadow-2xl shadow-ink/20"
+              onClick={(e) => e.stopPropagation()}
             >
-              <Handshake className="h-16 w-16 mx-auto mb-6" />
+              <div className="flex items-start justify-between">
+                <h3 className="display text-2xl text-ink">{t('contactUs')}</h3>
+                <motion.button
+                  whileHover={{ rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => setIsContactDialogOpen(false)}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-line/12 text-ink-2 transition-colors hover:border-accent hover:text-accent"
+                  aria-label="Yopish"
+                >
+                  <X className="h-4 w-4" />
+                </motion.button>
+              </div>
+
+              <div className="mt-8 text-center">
+                <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-accent text-accent-contrast">
+                  <Phone className="h-6 w-6" />
+                </span>
+                <p className="mt-5 text-ink-2">Bizning mutaxassislarimiz bilan bog'laning</p>
+                <div className="mt-5 rounded-2xl border border-line/10 bg-surface p-5">
+                  <div className="display text-2xl text-ink">+998 77 055 01 25</div>
+                  <div className="mt-1 font-mono text-xs tracking-wide text-ink-3">Ish kunlari: 9:00 - 18:00</div>
+                </div>
+              </div>
+
+              <div className="mt-7 flex gap-3">
+                <MagneticButton
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => {
+                    window.open('tel:+998770550125', '_self');
+                    setIsContactDialogOpen(false);
+                  }}
+                  className="flex flex-1 items-center justify-center gap-2 rounded-full bg-ink px-5 py-3 font-display font-semibold text-paper transition-colors duration-300 hover:bg-accent hover:text-accent-contrast"
+                >
+                  <Phone className="h-4 w-4" />
+                  <span>Qo'ng'roq qilish</span>
+                </MagneticButton>
+                <button
+                  onClick={() => setIsContactDialogOpen(false)}
+                  className="flex-1 rounded-full border border-line/15 px-5 py-3 font-display font-semibold text-ink-2 transition-colors duration-300 hover:border-line/30 hover:text-ink"
+                >
+                  Bekor qilish
+                </button>
+              </div>
             </motion.div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              {t('startPartnership')}
-            </h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              {t('partnershipDesc')}
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.08, y: -5, boxShadow: "0 20px 40px -12px rgba(0, 0, 0, 0.3)" }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg transform-gpu"
-              onClick={() => setIsContactDialogOpen(true)}
-            >
-              {t('contactUs')}
-            </motion.button>
           </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-12 mt-16">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-              transition={{ duration: 0.8, delay: 1.4, type: "spring", stiffness: 100 }}
-            >
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                {t('forEmployers')}
-              </h3>
-              <ul className="space-y-4 text-gray-600 dark:text-gray-300">
-                {[t('freeJobPosting'), t('directChatWithCandidates'), t('flexibleFilters'), t('analyticsReports')].map((item, idx) => (
-                  <motion.li
-                    key={idx}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                    transition={{ duration: 0.6, delay: 1.6 + idx * 0.1 }}
-                    whileHover={{ x: 10 }}
-                    className="flex items-start"
-                  >
-                    <motion.div 
-                      whileHover={{ scale: 1.5 }}
-                      className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"
-                    />
-                    <span>{item}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-              transition={{ duration: 0.8, delay: 1.6, type: "spring", stiffness: 100 }}
-            >
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                {t('premiumServices')}
-              </h3>
-              <ul className="space-y-4 text-gray-600 dark:text-gray-300">
-                {[t('promoteListings'), t('customDesign'), t('extendedAnalytics'), t('personalSupport')].map((item, idx) => (
-                  <motion.li
-                    key={idx}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-                    transition={{ duration: 0.6, delay: 1.8 + idx * 0.1 }}
-                    whileHover={{ x: -10 }}
-                    className="flex items-start"
-                  >
-                    <motion.div 
-                      whileHover={{ scale: 1.5 }}
-                      className="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"
-                    />
-                    <span>{item}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Contact Dialog */}
-        <AnimatePresence>
-          {isContactDialogOpen && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-              onClick={() => setIsContactDialogOpen(false)}
-            >
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8, y: 50 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.8, y: 50 }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                    {t('contactUs')}
-                  </h3>
-                  <motion.button
-                    whileHover={{ scale: 1.1, rotate: 90 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => setIsContactDialogOpen(false)}
-                    className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                  >
-                    <X className="h-5 w-5 text-gray-500" />
-                  </motion.button>
-                </div>
-
-                <div className="text-center mb-8">
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: [0, -10, 10, -10, 0] }}
-                    transition={{ duration: 0.6 }}
-                    className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full mb-4"
-                  >
-                    <Phone className="h-8 w-8" />
-                  </motion.div>
-                  <p className="text-gray-600 dark:text-gray-300 mb-6">
-                    Bizning mutaxassislarimiz bilan bog'laning
-                  </p>
-                  
-                  <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-4 mb-6">
-                    <div className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                      +998 77 055 01 25
-                    </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
-                      Ish kunlari: 9:00 - 18:00
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex space-x-4">
-                  <motion.button
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => {
-                      window.open('tel:+998770550125', '_self');
-                      setIsContactDialogOpen(false);
-                    }}
-                    className="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg flex items-center justify-center space-x-2"
-                  >
-                    <Phone className="h-5 w-5" />
-                    <span>Qo'ng'roq qilish</span>
-                  </motion.button>
-                  
-                  <motion.button
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => setIsContactDialogOpen(false)}
-                    className="flex-1 bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-200 px-6 py-3 rounded-xl font-semibold hover:bg-gray-300 dark:hover:bg-gray-500 transition-all duration-300"
-                  >
-                    Bekor qilish
-                  </motion.button>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-      <Footer />
+        )}
+      </AnimatePresence>
     </div>
   );
 };

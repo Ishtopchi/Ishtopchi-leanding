@@ -1,173 +1,185 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Smartphone, Star, Users, Briefcase } from 'lucide-react';
+import { motion, type Variants } from 'framer-motion';
+import { MapPin } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import AnimatedBackground from './AnimatedBackground';
+import AccentUnderline from './ui/AccentUnderline';
+import StoreButtons from './ui/StoreButtons';
+import CountUp from './ui/CountUp';
+
+// Localized live-feed jobs — the product's own content, made the hero's signature.
+const jobFeed: Record<string, { role: string; company: string; city: string; pay: string }[]> = {
+  uz: [
+    { role: 'Frontend dasturchi', company: 'Uzum Tech', city: 'Toshkent', pay: "18 mln so'm" },
+    { role: 'Buxgalter', company: 'Artel', city: 'Toshkent', pay: "9 mln so'm" },
+    { role: 'Sotuv menejeri', company: 'Korzinka', city: 'Samarqand', pay: "7 mln so'm" },
+    { role: 'Grafik dizayner', company: 'Click', city: 'Toshkent', pay: "12 mln so'm" },
+    { role: 'SMM mutaxassisi', company: 'Payme', city: 'Buxoro', pay: "8 mln so'm" },
+    { role: 'Logistika operatori', company: 'BTS Express', city: "Farg'ona", pay: "6.5 mln so'm" },
+  ],
+  en: [
+    { role: 'Frontend Developer', company: 'Uzum Tech', city: 'Tashkent', pay: '$1,400' },
+    { role: 'Accountant', company: 'Artel', city: 'Tashkent', pay: '$700' },
+    { role: 'Sales Manager', company: 'Korzinka', city: 'Samarkand', pay: '$550' },
+    { role: 'Graphic Designer', company: 'Click', city: 'Tashkent', pay: '$950' },
+    { role: 'SMM Specialist', company: 'Payme', city: 'Bukhara', pay: '$620' },
+    { role: 'Logistics Operator', company: 'BTS Express', city: 'Fergana', pay: '$500' },
+  ],
+  ru: [
+    { role: 'Frontend разработчик', company: 'Uzum Tech', city: 'Ташкент', pay: '18 млн сум' },
+    { role: 'Бухгалтер', company: 'Artel', city: 'Ташкент', pay: '9 млн сум' },
+    { role: 'Менеджер по продажам', company: 'Korzinka', city: 'Самарканд', pay: '7 млн сум' },
+    { role: 'Графический дизайнер', company: 'Click', city: 'Ташкент', pay: '12 млн сум' },
+    { role: 'SMM специалист', company: 'Payme', city: 'Бухара', pay: '8 млн сум' },
+    { role: 'Оператор логистики', company: 'BTS Express', city: 'Фергана', pay: '6.5 млн сум' },
+  ],
+};
+
+const statLabels: Record<string, string[]> = {
+  uz: ['Foydalanuvchi', 'Vakansiya', 'Reyting'],
+  en: ['Users', 'Vacancies', 'Rating'],
+  ru: ['Пользователей', 'Вакансий', 'Рейтинг'],
+};
+
+const feedTitle: Record<string, string> = { uz: 'Jonli oqim', en: 'Live feed', ru: 'Живая лента' };
+const availLabel: Record<string, string> = {
+  uz: 'iOS · Android · Bepul',
+  en: 'iOS · Android · Free',
+  ru: 'iOS · Android · Бесплатно',
+};
+
+const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
+
+const container: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.09, delayChildren: 0.1 } },
+};
+const rise: Variants = {
+  hidden: { opacity: 0, y: 22, filter: 'blur(6px)' },
+  show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.8, ease: EASE } },
+};
 
 const HeroSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const jobs = jobFeed[language] ?? jobFeed.uz;
+  const labels = statLabels[language] ?? statLabels.uz;
+  const loop = [...jobs, ...jobs]; // seamless marquee
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden" aria-label="Asosiy bo'lim">
+    <section
+      className="relative flex min-h-screen items-center overflow-hidden pt-24 pb-16"
+      aria-label="Asosiy bo'lim"
+    >
       <AnimatedBackground />
-      
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center">
+
+      <div className="edge relative z-10 w-full">
+        <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-8">
+          {/* Copy */}
           <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.8 }}
-            transition={{ duration: 1.2, type: "spring", stiffness: 100 }}
-            className="mb-8"
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="lg:col-span-7"
           >
-            <motion.div
-              whileHover={{ 
-                scale: 1.1, 
-                rotate: [0, -10, 10, -10, 0],
-                transition: { duration: 0.6 }
-              }}
-              className="inline-flex items-center justify-center w-24 h-24 rounded-3xl mb-8 shadow-2xl overflow-hidden"
-            >
-              <img 
-                src="/logo.jpg" 
-                alt="IshTopchi Logo" 
-                className="w-full h-full object-cover"
-                aria-hidden="true" 
-              />
-            </motion.div>
-            
-            <motion.h1 
-              className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 1.0, delay: 0.3 }}
-            >
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                {t('appName')}
+            <motion.div variants={rise} className="flex items-center gap-3">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
               </span>
-            </motion.h1>
-            
-            <motion.p 
-              className="text-2xl md:text-3xl text-gray-600 dark:text-gray-300 mb-4"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 1.0, delay: 0.5 }}
+              <span className="eyebrow">O'zbekiston · №1 ish qidiruv ilovasi</span>
+            </motion.div>
+
+            <motion.h1
+              variants={rise}
+              className="display mt-6 text-[clamp(2.75rem,7vw,5.25rem)] text-ink text-balance"
             >
               {t('heroSubtitle')}
-            </motion.p>
-            
-            <motion.p 
-              className="text-lg text-gray-500 dark:text-gray-400 max-w-3xl mx-auto mb-12"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 1.0, delay: 0.7 }}
+            </motion.h1>
+
+            <motion.div variants={rise} className="relative mt-3 h-3 w-52 sm:w-72">
+              <AccentUnderline delay={0.7} />
+            </motion.div>
+
+            <motion.p
+              variants={rise}
+              className="mt-8 max-w-xl text-lg leading-relaxed text-ink-2 text-pretty"
             >
               {t('heroDescription')}
             </motion.p>
+
+            <motion.div variants={rise} className="mt-10">
+              <StoreButtons />
+              <p className="eyebrow mt-5">{availLabel[language]}</p>
+            </motion.div>
           </motion.div>
 
+          {/* Live job feed — signature */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 1.0, delay: 0.9 }}
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
+            initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.9, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5"
           >
-            <motion.button
-              whileHover={{ 
-                scale: 1.08, 
-                y: -8, 
-                rotateX: 15,
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
-              }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => window.open('https://apps.apple.com/uz/app/ishtopchi/id6751149012', '_blank')}
-              className="flex items-center space-x-4 bg-black text-white px-8 py-4 rounded-2xl font-medium hover:bg-gray-800 transition-all duration-500 shadow-xl transform-gpu"
-              aria-label="App Store'dan yuklab olish"
-              rel="noopener noreferrer"
-              role="button"
-            >
-              <svg className="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-              </svg>
-              <div className="text-left">
-                <div className="text-sm opacity-90">{t('downloadFrom')}</div>
-                <div className="text-lg font-semibold">{t('appStore')}</div>
+            <div className="card-line relative overflow-hidden p-2">
+              <div className="flex items-center justify-between px-3 py-2.5">
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/60" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+                  </span>
+                  <span className="eyebrow">{feedTitle[language]}</span>
+                </div>
+                <span className="font-mono text-[0.65rem] tracking-[0.15em] text-ink-3">10 000+</span>
               </div>
-            </motion.button>
-            
-            <motion.button
-              whileHover={{ 
-                scale: 1.08, 
-                y: -8, 
-                rotateX: -15,
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
-              }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => window.open('https://play.google.com/store/apps/details?id=torex.top.ishtopchi', '_blank')}
-              className="flex items-center space-x-4 bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-4 rounded-2xl font-medium hover:from-green-600 hover:to-green-700 transition-all duration-500 shadow-xl transform-gpu"
-              aria-label="Google Play'dan yuklab olish"
-              rel="noopener noreferrer"
-              role="button"
-            >
-              <svg className="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
-              </svg>
-              <div className="text-left">
-                <div className="text-sm opacity-90">{t('downloadFrom')}</div>
-                <div className="text-lg font-semibold">{t('googlePlay')}</div>
-              </div>
-            </motion.button>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 1.0, delay: 1.1 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
-          >
-            <motion.div 
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="flex items-center justify-center space-x-3 bg-white/10 dark:bg-gray-800/30 backdrop-blur-sm rounded-2xl p-6 border border-white/20 dark:border-gray-700/30"
-              role="group"
-              aria-label="Foydalanuvchilar statistikasi"
-            >
-              <Users className="h-8 w-8 text-blue-600 dark:text-blue-400" aria-hidden="true" />
-              <div className="text-left">
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">50K+</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Foydalanuvchilar</div>
+              <div className="mask-fade-y relative h-[27rem] overflow-hidden pause-on-hover">
+                <div className="flex animate-marquee-y flex-col gap-2.5" style={{ ['--marquee-duration' as string]: '26s' }}>
+                  {loop.map((job, i) => (
+                    <div
+                      key={i}
+                      className="group rounded-xl border border-line/8 bg-surface-2 px-4 py-3.5 transition-colors duration-300 hover:border-accent/40"
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="min-w-0">
+                          <p className="truncate font-display text-[0.95rem] font-semibold text-ink">
+                            {job.role}
+                          </p>
+                          <p className="mt-0.5 flex items-center gap-1.5 truncate text-xs text-ink-3">
+                            <span>{job.company}</span>
+                            <span className="text-ink-3/50">·</span>
+                            <MapPin className="h-3 w-3" />
+                            <span>{job.city}</span>
+                          </p>
+                        </div>
+                        <span className="shrink-0 rounded-full bg-accent/10 px-2.5 py-1 font-mono text-[0.68rem] font-medium text-accent">
+                          {job.pay}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </motion.div>
-            
-            <motion.div 
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="flex items-center justify-center space-x-3 bg-white/10 dark:bg-gray-800/30 backdrop-blur-sm rounded-2xl p-6 border border-white/20 dark:border-gray-700/30"
-              role="group"
-              aria-label="Vakansiyalar statistikasi"
-            >
-              <Briefcase className="h-8 w-8 text-green-600 dark:text-green-400" aria-hidden="true" />
-              <div className="text-left">
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">10K+</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Vakansiyalar</div>
-              </div>
-            </motion.div>
-            
-            <motion.div 
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="flex items-center justify-center space-x-3 bg-white/10 dark:bg-gray-800/30 backdrop-blur-sm rounded-2xl p-6 border border-white/20 dark:border-gray-700/30"
-              role="group"
-              aria-label="Reyting statistikasi"
-            >
-              <Star className="h-8 w-8 text-yellow-500 dark:text-yellow-400" aria-hidden="true" />
-              <div className="text-left">
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">4.8</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Reyting</div>
-              </div>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
+
+        {/* Stat strip */}
+        <motion.dl
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-16 grid grid-cols-3 divide-x divide-line/10 border-y border-line/10 py-8 sm:mt-20"
+        >
+          {[
+            { value: <CountUp to={50} suffix="K+" />, label: labels[0] },
+            { value: <CountUp to={10} suffix="K+" />, label: labels[1] },
+            { value: <CountUp to={4.8} decimals={1} />, label: labels[2] },
+          ].map((stat, i) => (
+            <div key={i} className="px-4 text-center sm:px-8">
+              <dd className="display text-4xl text-ink sm:text-5xl">{stat.value}</dd>
+              <dt className="eyebrow mt-2">{stat.label}</dt>
+            </div>
+          ))}
+        </motion.dl>
       </div>
     </section>
   );
