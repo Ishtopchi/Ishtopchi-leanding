@@ -10,35 +10,31 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>(() => {
-    const saved = localStorage.getItem('theme');
-    if (saved) return saved as Theme;
-    
-    // Check system preference
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
-    return 'light';
-  });
+  // Start at a fixed default so the server render and the first client render
+  // match (no hydration mismatch). The real theme is applied to <html> before
+  // React by the inline boot script in index.html; we sync to it after mount.
+  const [theme, setTheme] = useState<Theme>('light');
 
   useEffect(() => {
-    localStorage.setItem('theme', theme);
-    
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [theme]);
+    const isDark = document.documentElement.classList.contains('dark');
+    setTheme(isDark ? 'dark' : 'light');
+  }, []);
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    setTheme((prev) => {
+      const next = prev === 'light' ? 'dark' : 'light';
+      try {
+        localStorage.setItem('theme', next);
+      } catch {
+        /* storage unavailable — ignore */
+      }
+      document.documentElement.classList.toggle('dark', next === 'dark');
+      return next;
+    });
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>
   );
 };
 
