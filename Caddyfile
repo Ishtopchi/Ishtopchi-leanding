@@ -65,6 +65,10 @@
 		zstd
 	}
 
-	# match against direct against HTML file matches, folder-level index.html, and optionally fallback to root index.html
-	try_files {path} {path}.html {path}/index.html{{if .IndexFallback}} /index.html{{end}}
+	# This is a client-side-routed SPA (BrowserRouter): every unmatched path must
+	# fall back to /index.html so deep links like /uz or /uz/support render instead
+	# of 404-ing. The fallback is unconditional on purpose — it must not depend on
+	# Railpack's SPA auto-detection (.IndexFallback), which is what left deep links
+	# returning 404 while the root served fine.
+	try_files {path} {path}.html {path}/index.html /index.html
 }
