@@ -1,0 +1,70 @@
+# Static server for the Vite build, used by Railpack instead of its default Caddyfile.
+# Railpack renders this file as a Go template before starting Caddy: the DIST_DIR
+# placeholder below resolves to /app/dist, and the IndexFallback conditional on the
+# last line keeps the SPA fallback that BrowserRouter (src/App.tsx) needs.
+# Keep both placeholders intact when editing.
+
+# global options
+{
+	admin off
+	persist_config off
+	auto_https off
+
+	log {
+		format json
+	}
+
+	servers {
+		trusted_proxies static private_ranges 100.0.0.0/8
+	}
+}
+
+# listens on $PORT, assigned by the platform; defaults to 80
+:{$PORT:80} {
+	log {
+		format json
+	}
+
+	respond /health 200
+
+	# Prevent some browsers from MIME-sniffing a response away from the declared Content-Type
+	header {
+		X-Content-Type-Options "nosniff"
+		# Remove Server header
+		-Server
+	}
+
+	# serve from the 'dist' folder (Vite builds into the 'dist' folder)
+	root * {{.DIST_DIR}}
+
+	# Vite fingerprints everything under /assets, so those URLs can never go stale.
+	@immutable path /assets/*
+	header @immutable Cache-Control "public, max-age=31536000, immutable"
+
+	# Unhashed files copied from public/ — cache briefly but keep revalidating.
+	@static path /logo.jpg /manifest.json /robots.txt /sitemap.xml /browserconfig.xml
+	header @static Cache-Control "public, max-age=3600, must-revalidate"
+
+	# Everything else is the app shell (index.html, incl. every SPA deep link).
+	# Caching those pins clients to old asset hashes after a deploy, so they must
+	# revalidate on every request.
+	@revalidate {
+		not path /assets/* /logo.jpg /manifest.json /robots.txt /sitemap.xml /browserconfig.xml
+	}
+	header @revalidate Cache-Control "no-cache"
+
+	# Handle static files
+	file_server {
+		hide .git
+		hide .env*
+	}
+
+	# Compression with more formats
+	encode {
+		gzip
+		zstd
+	}
+
+	# match against direct against HTML file matches, folder-level index.html, and optionally fallback to root index.html
+	try_files {path} {path}.html {path}/index.html{{if .IndexFallback}} /index.html{{end}}
+}
