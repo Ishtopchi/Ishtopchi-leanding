@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="IshTopchi">
+  <defs>
+    <linearGradient id="it-bg" x1="256" y1="48" x2="256" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2A47A6"/>
+      <stop offset="0.52" stop-color="#152A6E"/>
+      <stop offset="1" stop-color="#0A1642"/>
+    </linearGradient>
+    <radialGradient id="it-sheen" cx="256" cy="150" r="230" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3B58BE" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#3B58BE" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect x="40" y="48" width="432" height="432" rx="120" fill="url(#it-bg)"/>
+  <rect x="40" y="48" width="432" height="432" rx="120" fill="url(#it-sheen)"/>
+  <circle cx="256" cy="150" r="54" fill="none" stroke="#ffffff" stroke-width="16"/>
+  <rect x="212" y="214" width="88" height="208" rx="34" fill="none" stroke="#ffffff" stroke-width="16"/>
+</svg>

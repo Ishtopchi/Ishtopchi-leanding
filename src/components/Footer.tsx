@@ -35,7 +35,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="md:col-span-5">
             <Link to={`/${currentLang}`} className="flex items-center gap-2.5" aria-label="IshTopchi">
-              <img src="/logo.jpg" alt="" className="h-9 w-9 rounded-lg object-cover ring-1 ring-line/10" />
+              <img src="/logo.svg" alt="" className="h-10 w-10 object-contain" />
               <span className="font-display text-2xl font-bold lowercase tracking-tight text-ink">
                 ishtopchi
               </span>

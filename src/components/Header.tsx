@@ -45,11 +45,11 @@ const Header: React.FC = () => {
           {/* Wordmark */}
           <Link to={`/${currentLang}`} aria-label="IshTopchi — bosh sahifa" className="group flex items-center gap-2.5">
             <motion.img
-              whileHover={{ rotate: -6 }}
+              whileHover={{ rotate: -6, scale: 1.05 }}
               transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-              src="/logo.jpg"
+              src="/logo.svg"
               alt=""
-              className="h-8 w-8 rounded-lg object-cover ring-1 ring-line/10"
+              className="h-9 w-9 object-contain"
             />
             <span className="font-display text-xl font-bold lowercase tracking-tight text-ink">
               ishtopchi
